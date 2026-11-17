@@ -36,10 +36,13 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
 
             <div class="form-group" style="margin: 0;">
               <label>${isRtl ? 'الغرض' : 'Purpose'}</label>
-              <select name="purpose" class="form-control">
+              <select name="purpose" class="form-control" onchange="this.form.action = (this.value === 'management' ? '/${lang}/management' : this.value === 'partnerships' ? '/${lang}/partnerships' : this.value === 'suppliers' ? '/${lang}/suppliers' : '/${lang}/farms')">
                 <option value="all">${isRtl ? 'الكل (بيع وإيجار)' : 'All (Sale & Rent)'}</option>
                 <option value="sale">${isRtl ? 'مزارع للبيع' : 'Farms for Sale'}</option>
                 <option value="rent">${isRtl ? 'مزارع للإيجار' : 'Farms for Rent'}</option>
+                <option value="management">${isRtl ? 'إدارة وتشغيل المزارع' : 'Farm Management'}</option>
+                <option value="partnerships">${isRtl ? 'الشراكات والاستثمار' : 'Joint Ventures & Investment'}</option>
+                <option value="suppliers">${isRtl ? 'شركات الموردين' : 'Suppliers Directory'}</option>
               </select>
             </div>
 
@@ -351,10 +354,13 @@ export function renderFarmsPage({ lang, farms = [], total = 0, locations = [], f
 
             <div class="form-group" style="margin: 0;">
               <label>${isRtl ? 'الغرض' : 'Listing Purpose'}</label>
-              <select name="purpose" class="form-control">
+              <select name="purpose" class="form-control" onchange="this.form.action = (this.value === 'management' ? '/${lang}/management' : this.value === 'partnerships' ? '/${lang}/partnerships' : this.value === 'suppliers' ? '/${lang}/suppliers' : '/${lang}/farms')">
                 <option value="all" ${filters.purpose === 'all' ? 'selected' : ''}>${isRtl ? 'الكل (بيع وإيجار)' : 'All (Sale & Rent)'}</option>
-                <option value="sale" ${filters.purpose === 'sale' ? 'selected' : ''}>${isRtl ? 'للبيع فقط' : 'For Sale'}</option>
-                <option value="rent" ${filters.purpose === 'rent' ? 'selected' : ''}>${isRtl ? 'للإيجار فقط' : 'For Rent'}</option>
+                <option value="sale" ${filters.purpose === 'sale' ? 'selected' : ''}>${isRtl ? 'مزارع للبيع' : 'Farms for Sale'}</option>
+                <option value="rent" ${filters.purpose === 'rent' ? 'selected' : ''}>${isRtl ? 'مزارع للإيجار' : 'Farms for Rent'}</option>
+                <option value="management" ${filters.purpose === 'management' ? 'selected' : ''}>${isRtl ? 'إدارة وتشغيل المزارع' : 'Farm Management'}</option>
+                <option value="partnerships" ${filters.purpose === 'partnerships' ? 'selected' : ''}>${isRtl ? 'الشراكات والاستثمار' : 'Joint Ventures & Investment'}</option>
+                <option value="suppliers" ${filters.purpose === 'suppliers' ? 'selected' : ''}>${isRtl ? 'شركات الموردين' : 'Suppliers Directory'}</option>
               </select>
             </div>
 

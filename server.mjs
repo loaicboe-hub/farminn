@@ -280,11 +280,29 @@ export async function app(req, res) {
 
       // Farms Catalog (/:lang/farms)
       if (subpath === '/farms') {
-        const locations = (await db.query('SELECT id, slug, name_en, name_ar FROM taxonomy_locations WHERE is_active = 1 ORDER BY sort_order')).rows;
         const purpose = queryParams.get('purpose') || queryParams.get('listing');
+        const q = queryParams.get('q')?.trim() || '';
+
+        // If the user selected Management, Partnerships, or Suppliers from the search filter
+        if (purpose === 'management') {
+          res.writeHead(302, { Location: `/${lang}/management${q ? `?q=${encodeURIComponent(q)}` : ''}` });
+          res.end();
+          return;
+        }
+        if (purpose === 'partnerships') {
+          res.writeHead(302, { Location: `/${lang}/partnerships${q ? `?q=${encodeURIComponent(q)}` : ''}` });
+          res.end();
+          return;
+        }
+        if (purpose === 'suppliers') {
+          res.writeHead(302, { Location: `/${lang}/suppliers${q ? `?q=${encodeURIComponent(q)}` : ''}` });
+          res.end();
+          return;
+        }
+
+        const locations = (await db.query('SELECT id, slug, name_en, name_ar FROM taxonomy_locations WHERE is_active = 1 ORDER BY sort_order')).rows;
         const gov = queryParams.get('gov');
         const minArea = parseFloat(queryParams.get('minArea') || '0');
-        const q = queryParams.get('q')?.trim() || '';
 
         let sql = `
           SELECT f.*, l.name_en as gov_name_en, l.name_ar as gov_name_ar,

@@ -219,16 +219,19 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
     .mobile-drawer-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       z-index: 1050;
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
       transition: opacity 0.25s ease, visibility 0.25s ease;
     }
     .mobile-drawer-backdrop.is-open {
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
     }
     .mobile-drawer {
       position: fixed;
@@ -240,17 +243,22 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
       z-index: 1060;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
       transform: translateX(-100%);
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       overflow-y: auto;
       overscroll-behavior: contain;
+      pointer-events: none;
+      visibility: hidden;
     }
     [dir="rtl"] .mobile-drawer {
       transform: translateX(100%);
     }
-    .mobile-drawer.is-open {
+    .mobile-drawer.is-open,
+    [dir="rtl"] .mobile-drawer.is-open {
       transform: translateX(0) !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
     }
     .mobile-drawer-header {
       display: flex;
@@ -600,8 +608,8 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
             ${otherLangLabel}
           </a>
           ${userActionHtml}
-          <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="${isRtl ? 'فتح القائمة' : 'Open Navigation Menu'}" aria-expanded="false" aria-controls="mobile-nav-drawer">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="${isRtl ? 'فتح القائمة' : 'Open Navigation Menu'}" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="window.toggleMobileNavDrawer(event)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -613,7 +621,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
   </header>
 
   <!-- Mobile Navigation Drawer Overlay -->
-  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop" onclick="window.closeMobileNavDrawer(event)"></div>
   <aside class="mobile-drawer" id="mobile-nav-drawer" aria-hidden="true" role="dialog" aria-label="${isRtl ? 'قائمة المنصة' : 'Navigation Menu'}">
     <!-- Drawer Header -->
     <div class="mobile-drawer-header">
@@ -627,7 +635,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
           ${escapeHtml(brandName)}
         </strong>
       </div>
-      <button type="button" class="mobile-drawer-close" id="mobile-drawer-close" aria-label="${isRtl ? 'إغلاق القائمة' : 'Close Menu'}">
+      <button type="button" class="mobile-drawer-close" id="mobile-drawer-close" aria-label="${isRtl ? 'إغلاق القائمة' : 'Close Menu'}" onclick="window.closeMobileNavDrawer(event)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -773,53 +781,70 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
       });
     });
 
-    // Mobile Drawer Open / Close Logic
-    (function initMobileDrawer() {
-      const menuToggle = document.getElementById('mobile-menu-toggle');
+    // Mobile Drawer Open / Close Logic (Global & Event-Bound)
+    window.openMobileNavDrawer = function() {
       const drawer = document.getElementById('mobile-nav-drawer');
       const backdrop = document.getElementById('mobile-drawer-backdrop');
-      const drawerClose = document.getElementById('mobile-drawer-close');
-
-      function openDrawer() {
-        drawer?.classList.add('is-open');
-        backdrop?.classList.add('is-open');
-        menuToggle?.setAttribute('aria-expanded', 'true');
-        drawer?.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+      const toggle = document.getElementById('mobile-menu-toggle');
+      if (drawer) {
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
       }
-
-      function closeDrawer() {
-        drawer?.classList.remove('is-open');
-        backdrop?.classList.remove('is-open');
-        menuToggle?.setAttribute('aria-expanded', 'false');
-        drawer?.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+      if (backdrop) {
+        backdrop.classList.add('is-open');
       }
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      document.body.style.overflow = 'hidden';
+    };
 
-      menuToggle?.addEventListener('click', function(e) {
+    window.closeMobileNavDrawer = function(e) {
+      if (e) {
         e.stopPropagation();
-        const isOpen = drawer?.classList.contains('is-open');
-        if (isOpen) closeDrawer();
-        else openDrawer();
-      });
+      }
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+      const toggle = document.getElementById('mobile-menu-toggle');
+      if (drawer) {
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('is-open');
+      }
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
+    };
 
-      drawerClose?.addEventListener('click', closeDrawer);
-      backdrop?.addEventListener('click', closeDrawer);
+    window.toggleMobileNavDrawer = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (drawer && drawer.classList.contains('is-open')) {
+        window.closeMobileNavDrawer();
+      } else {
+        window.openMobileNavDrawer();
+      }
+    };
 
-      // Close on ESC key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && drawer?.classList.contains('is-open')) {
-          closeDrawer();
-        }
-      });
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        window.closeMobileNavDrawer();
+      }
+    });
 
-      // Close drawer when clicking any link inside it
-      drawer?.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          closeDrawer();
-        });
+    // Close drawer when clicking any link inside it
+    document.getElementById('mobile-nav-drawer')?.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        window.closeMobileNavDrawer();
       });
-    })();
+    });
 
     // Logout Buttons (header and drawer)
     ['logout-btn', 'drawer-logout-btn'].forEach(function(id) {
