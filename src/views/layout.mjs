@@ -374,7 +374,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
 
       <!-- Right Controls: Language & Account -->
       <div class="cluster" style="gap: 12px;">
-        <a href="javascript:void(0)" class="lang-switcher-btn" id="lang-switch-btn" data-target-lang="${otherLang}">
+        <a href="/${otherLang}" class="lang-switcher-btn" id="lang-switch-btn" data-target-lang="${otherLang}">
           ${otherLangLabel}
         </a>
         ${userActionHtml}
@@ -463,16 +463,15 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
   <!-- Script for Language Switch & Logout -->
   <script>
     // Language Switcher preserving path
-    document.getElementById('lang-switch-btn')?.addEventListener('click', function() {
+    document.getElementById('lang-switch-btn')?.addEventListener('click', function(e) {
+      e.preventDefault();
       const targetLang = this.getAttribute('data-target-lang');
       const currentPath = window.location.pathname;
-      let newPath = currentPath;
+      let newPath = '/' + targetLang;
       if (currentPath.startsWith('/en')) {
-        newPath = currentPath.replace(/^\\/en/, '/' + targetLang);
+        newPath = currentPath.replace(/^\/en/, '/' + targetLang);
       } else if (currentPath.startsWith('/ar')) {
-        newPath = currentPath.replace(/^\\/ar/, '/' + targetLang);
-      } else {
-        newPath = '/' + targetLang;
+        newPath = currentPath.replace(/^\/ar/, '/' + targetLang);
       }
       document.cookie = 'site_lang=' + targetLang + '; path=/; max-age=31536000';
       window.location.href = newPath + window.location.search;

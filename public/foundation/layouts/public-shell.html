@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="public.metaTitle">Foundation Public Shell Blueprint</title>
+  <meta name="description" content="Reusable, neutral public website layout shell supporting six languages and responsive RTL/LTR rendering.">
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="../design-system/base.css">
+  <link rel="stylesheet" href="../design-system/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="common.skipToContent">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-brand" href="#top">
+        <span aria-hidden="true">◆</span>
+        <span data-setting="site_name" data-i18n="public.brandPlaceholder">Brand Name (From Website Settings)</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-nav__link" href="#home" data-i18n="nav.home">Home</a>
+        <a class="site-nav__link" href="#about" data-i18n="nav.about">About</a>
+        <a class="site-nav__link" href="#services" data-i18n="nav.modules">Capabilities</a>
+        <a class="site-nav__link" href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="site-header__actions">
+        <label class="sr-only" for="public-lang-select" data-i18n="common.selectLanguage">Select language</label>
+        <select id="public-lang-select" class="lang-select" data-lang-switcher>
+          <option value="ar">العربية (AR)</option>
+          <option value="en" selected>English (EN)</option>
+          <option value="fr">Français (FR)</option>
+          <option value="ru">Русский (RU)</option>
+          <option value="de">Deutsch (DE)</option>
+          <option value="es">Español (ES)</option>
+        </select>
+
+        <button type="button" class="btn btn--secondary mobile-menu-toggle" data-mobile-menu-open aria-expanded="false" aria-controls="mobile-nav-drawer">
+          <span data-i18n="common.menu">Menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" data-drawer-backdrop hidden></div>
+  <aside id="mobile-nav-drawer" class="mobile-drawer" aria-label="Mobile Navigation" data-open="false" hidden>
+    <div class="cluster" style="justify-content: space-between;">
+      <strong data-i18n="common.menu">Menu</strong>
+      <button type="button" class="btn btn--ghost btn--sm" data-mobile-menu-close data-i18n="common.close">Close</button>
+    </div>
+    <nav class="stack" aria-label="Mobile Primary">
+      <a class="site-nav__link" href="#home" data-i18n="nav.home">Home</a>
+      <a class="site-nav__link" href="#about" data-i18n="nav.about">About</a>
+      <a class="site-nav__link" href="#services" data-i18n="nav.modules">Capabilities</a>
+      <a class="site-nav__link" href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </aside>
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container stack">
+        <span class="badge badge--info" data-i18n="public.blueprintNotice">Layout Blueprint — Customize Per Industry &amp; Connect Backend</span>
+        <h1 data-i18n="public.heroHeading">Universal Website Foundation Shell</h1>
+        <p data-i18n="public.heroSubtitle">
+          Replace this neutral section structure with your client's industry-specific design, pages, and centralized Website Settings.
+        </p>
+        <div class="cluster">
+          <a class="btn btn--primary" href="#contact" data-i18n="common.contactUs">Contact Us</a>
+          <a class="btn btn--secondary" href="./admin-shell.html" data-i18n="public.openAdminShell">View Admin Shell Blueprint</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" style="background: var(--color-surface-alt);">
+      <div class="container grid grid--cols-2">
+        <div class="card stack">
+          <h2 data-i18n="contact.centralizedHeading">Centralized Contact Bindings</h2>
+          <p data-i18n="contact.centralizedDescription">
+            All phone, WhatsApp, email, physical address, and working-hour outputs must be populated dynamically from Admin Dashboard &rarr; Website Settings.
+          </p>
+          <ul class="stack" style="list-style: none; padding: 0;">
+            <li><strong data-i18n="contact.whatsapp">WhatsApp:</strong> <span data-setting="whatsapp_number">— (Unconfigured)</span></li>
+            <li><strong data-i18n="contact.phone">Phone:</strong> <span data-setting="mobile_number">— (Unconfigured)</span></li>
+            <li><strong data-i18n="contact.email">Email:</strong> <span data-setting="email_address">— (Unconfigured)</span></li>
+            <li><strong data-i18n="contact.address">Address:</strong> <span data-setting="physical_address">— (Unconfigured)</span></li>
+            <li><strong data-i18n="contact.hours">Working Hours:</strong> <span data-setting="working_hours">— (Unconfigured)</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="contact.formHeading">Inquiry Form Blueprint</h2>
+          <p class="form-hint" data-i18n="contact.backendNotice">Requires server-side validation, CSRF protection, and rate limiting before live submission.</p>
+          <form class="form-grid" action="/api/public/contact" method="post" data-blueprint-form>
+            <div class="form-field">
+              <label class="form-label" for="contact-name" data-i18n="form.fullName">Full Name</label>
+              <input class="form-control" id="contact-name" name="name" type="text" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="contact-email" data-i18n="form.email">Email Address</label>
+              <input class="form-control" id="contact-email" name="email" type="email" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="contact-message" data-i18n="form.message">Message</label>
+              <textarea class="form-control" id="contact-message" name="message" required></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit" data-i18n="form.submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="grid grid--cols-3">
+        <div>
+          <strong data-setting="site_name" data-i18n="public.brandPlaceholder">Brand Name (From Website Settings)</strong>
+          <p style="margin-block-start: var(--space-2); color: #94a3b8;" data-i18n="footer.summary">
+            Dynamic footer populated from centralized Website Settings.
+          </p>
+        </div>
+        <div>
+          <strong data-i18n="footer.navigation">Navigation</strong>
+          <ul class="stack" style="list-style: none; padding: 0; margin-block-start: var(--space-2);">
+            <li><a href="#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <strong data-i18n="footer.contactChannels">Contact Channels</strong>
+          <ul class="stack" style="list-style: none; padding: 0; margin-block-start: var(--space-2);">
+            <li><span data-setting="email_address">— (Email from Website Settings)</span></li>
+            <li><span data-setting="whatsapp_number">— (WhatsApp from Website Settings)</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span data-setting="copyright_text">&copy; Year &mdash; Configured via Website Settings</span>
+        <span data-i18n="footer.languagesSupported">Languages: AR &bull; EN &bull; FR &bull; RU &bull; DE &bull; ES</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./shell.js"></script>
+</body>
+</html>
+

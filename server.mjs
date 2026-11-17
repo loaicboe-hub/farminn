@@ -76,7 +76,8 @@ export async function app(req, res) {
         'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
         'Cache-Control': 'public, max-age=86400'
       });
-      fs.createReadStream(safePath).pipe(res);
+      const fileData = fs.readFileSync(safePath);
+      res.end(fileData);
       return;
     }
   }

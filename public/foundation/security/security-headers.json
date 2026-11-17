@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "headers": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+  },
+  "contentSecurityPolicyNotes": {
+    "default-src": "'self'",
+    "object-src": "'none'",
+    "base-uri": "'self'",
+    "frame-ancestors": "'self'",
+    "upgrade-insecure-requests": "Enable in HTTPS production environments"
+  },
+  "notes": [
+    "Apply HSTS only when HTTPS is active across the entire domain.",
+    "Tailor script-src, style-src, and img-src explicitly to approved project fonts, CDNs, or media origins without unsafe wildcards."
+  ]
+}
+

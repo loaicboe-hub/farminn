@@ -27,11 +27,24 @@ export default async function handler(req, res) {
   try {
     await ensureDatabaseReady();
 
-    // In Vercel rewrites, adjust URL if needed
-    if (req.url === '/api/index.js' || req.url.startsWith('/api/index.js?')) {
-      const forwardedUri = req.headers['x-forwarded-uri'] || req.headers['x-matched-path'] || req.headers['x-invoke-path'];
-      if (forwardedUri) {
-        req.url = forwardedUri;
+    // In Vercel rewrites, recover the original requested URL
+    const parsed = new URL(req.url, 'http://localhost');
+    let explicitUrl = parsed.searchParams.get('__url');
+
+    if (explicitUrl) {
+      if (explicitUrl.startsWith('//')) {
+        explicitUrl = '/' + explicitUrl.replace(/^\/+/, '');
+      }
+      parsed.searchParams.delete('__url');
+      const remainingSearch = parsed.searchParams.toString();
+      req.url = explicitUrl + (remainingSearch ? (explicitUrl.includes('?') ? '&' : '?') + remainingSearch : '');
+    } else if (req.url === '/api/index.js' || req.url === '/api' || req.url.startsWith('/api/index.js?')) {
+      const forwarded = req.headers['x-forwarded-uri'] || 
+                        req.headers['x-matched-path'] || 
+                        req.headers['x-invoke-path'] || 
+                        req.headers['x-vercel-original-url'];
+      if (forwarded && forwarded !== '/api/index.js' && forwarded !== '/api') {
+        req.url = forwarded;
       }
     }
 

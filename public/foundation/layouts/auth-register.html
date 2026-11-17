@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="auth.registerTitle">Create Account</title>
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="../design-system/base.css">
+  <link rel="stylesheet" href="../design-system/components.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card card stack">
+    <div class="cluster" style="justify-content: space-between;">
+      <strong data-setting="site_name" data-i18n="admin.brand">Admin Foundation</strong>
+      <label class="sr-only" for="register-lang-select" data-i18n="common.selectLanguage">Select language</label>
+      <select id="register-lang-select" class="lang-select" data-lang-switcher>
+        <option value="ar">العربية (AR)</option>
+        <option value="en" selected>English (EN)</option>
+        <option value="fr">Français (FR)</option>
+        <option value="ru">Русский (RU)</option>
+        <option value="de">Deutsch (DE)</option>
+        <option value="es">Español (ES)</option>
+      </select>
+    </div>
+
+    <div class="alert alert--info" role="status" data-i18n="auth.registerDisabledNotice">
+      Public registration is disabled by default unless ALLOW_PUBLIC_REGISTRATION=true is enabled for this project.
+    </div>
+
+    <h1 style="font-size: var(--text-2xl); margin-bottom: 0;" data-i18n="auth.registerTitle">Create Account</h1>
+
+    <form class="form-grid" action="/api/auth/register" method="post" data-blueprint-form>
+      <div class="form-field">
+        <label class="form-label" for="register-name" data-i18n="form.fullName">Full Name</label>
+        <input class="form-control" id="register-name" name="full_name" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="register-email" data-i18n="form.email">Email Address</label>
+        <input class="form-control" id="register-email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="register-password" data-i18n="form.password">Password</label>
+        <input class="form-control" id="register-password" name="password" type="password" autocomplete="new-password" minlength="10" required>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="register-confirm" data-i18n="form.confirmPassword">Confirm Password</label>
+        <input class="form-control" id="register-confirm" name="confirm_password" type="password" autocomplete="new-password" minlength="10" required>
+      </div>
+
+      <button class="btn btn--primary" type="submit" data-i18n="auth.registerTitle">Create Account</button>
+    </form>
+
+    <a href="./auth-login.html" style="font-size: var(--text-sm);" data-i18n="auth.backToLogin">Back to Sign In</a>
+  </main>
+
+  <script type="module" src="./shell.js"></script>
+</body>
+</html>
+
