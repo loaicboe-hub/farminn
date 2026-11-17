@@ -1,0 +1,131 @@
+{
+  "version": "1.0.0",
+  "authentication": {
+    "passwordHashing": "argon2id_or_bcrypt_cost_12_plus",
+    "passwordPolicy": {
+      "minLength": 10,
+      "maxLength": 128,
+      "requireUppercase": true,
+      "requireLowercase": true,
+      "requireNumber": true,
+      "requireSymbol": false,
+      "disallowCommonPasswords": true
+    },
+    "resetToken": {
+      "entropyBytes": 32,
+      "storeAs": "sha256_hash",
+      "ttlMinutes": 30,
+      "singleUse": true,
+      "nonEnumeratingResponse": true
+    },
+    "emailVerification": {
+      "entropyBytes": 32,
+      "storeAs": "sha256_hash",
+      "ttlHours": 24,
+      "singleUse": true
+    },
+    "sessions": {
+      "httpOnly": true,
+      "secureInProduction": true,
+      "sameSite": "lax",
+      "rotateSessionIdOnLogin": true,
+      "supportRevokeOtherSessions": true
+    }
+  },
+  "rateLimiting": {
+    "enabled": true,
+    "tiers": {
+      "login": {
+        "maxAttempts": 5,
+        "windowSeconds": 900,
+        "keyBy": ["ip", "normalized_email"],
+        "lockoutSeconds": 900
+      },
+      "passwordReset": {
+        "maxRequests": 3,
+        "windowSeconds": 900,
+        "keyBy": ["ip", "normalized_email"]
+      },
+      "accountPasswordVerify": {
+        "maxAttempts": 5,
+        "windowSeconds": 900,
+        "keyBy": ["user_id", "ip"],
+        "lockoutSeconds": 900
+      },
+      "publicForms": {
+        "maxRequests": 5,
+        "windowSeconds": 300,
+        "keyBy": ["ip"]
+      },
+      "apiAuthenticated": {
+        "maxRequests": 120,
+        "windowSeconds": 60,
+        "keyBy": ["user_id", "ip"]
+      },
+      "apiPublic": {
+        "maxRequests": 60,
+        "windowSeconds": 60,
+        "keyBy": ["ip"]
+      }
+    }
+  },
+  "requestLimits": {
+    "maxJsonBodyBytes": 1048576,
+    "maxFormBodyBytes": 2097152,
+    "maxMultipartRequestBytes": 12582912
+  },
+  "trustedOrigins": {
+    "buildLinksStrictlyFromAppUrl": true,
+    "neverTrustUnvalidatedHostHeader": true,
+    "corsAllowWildcardWithCredentials": false,
+    "allowedOriginsEnvVar": "CORS_ALLOWED_ORIGINS"
+  },
+  "uploads": {
+    "validateExtension": true,
+    "validateMimeType": true,
+    "validateMagicBytes": true,
+    "randomizeStoredFilename": true,
+    "storeOutsidePublicWebrootOrDisableExecution": true,
+    "rejectExecutableAndScriptTypes": true,
+    "categories": {
+      "image": {
+        "maxBytes": 5242880,
+        "extensions": ["jpg", "jpeg", "png", "webp", "avif"],
+        "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/avif"],
+        "note": "Do not allow untrusted SVG uploads from unprivileged users without strict sanitization."
+      },
+      "brandIcon": {
+        "maxBytes": 1048576,
+        "extensions": ["png", "ico", "webp"],
+        "mimeTypes": ["image/png", "image/x-icon", "image/vnd.microsoft.icon", "image/webp"],
+        "note": "SVG logos/favicons should only be uploaded by trusted administrators with strict SVG sanitization."
+      },
+      "document": {
+        "maxBytes": 10485760,
+        "extensions": ["pdf", "docx", "xlsx"],
+        "mimeTypes": [
+          "application/pdf",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ]
+      }
+    }
+  },
+  "securityEventsLogged": [
+    "auth.login.success",
+    "auth.login.failure",
+    "auth.login.locked",
+    "auth.logout",
+    "auth.sessions.revoke_others",
+    "auth.password.change",
+    "auth.password.reset_request",
+    "auth.password.reset_complete",
+    "auth.email.verify",
+    "rbac.role.assigned",
+    "rbac.permission.denied",
+    "user.status.changed",
+    "media.upload.rejected",
+    "rate_limit.triggered"
+  ]
+}
+

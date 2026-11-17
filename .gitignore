@@ -1,0 +1,32 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Local configuration overrides (uncomment if overriding locally)
+# config/project.config.json
+
+# Logs, runtime storage & user uploads
+logs/
+*.log
+storage/
+uploads/
+tmp/
+
+# Dependency & build outputs (when a project adopts a runtime)
+node_modules/
+vendor/
+.venv/
+__pycache__/
+dist/
+build/
+.next/
+.nuxt/
+.output/
+
+# OS & editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+

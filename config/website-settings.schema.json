@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Master Foundation Centralized Website Settings Contract",
+  "description": "Canonical structure for records stored in website_settings (strictly separate from personal Account Settings).",
+  "type": "object",
+  "properties": {
+    "site_identity": {
+      "setting_group": "identity",
+      "is_public": true,
+      "fields": {
+        "site_name": { "type": "localized_6lang", "required": true },
+        "tagline": { "type": "localized_6lang", "required": false },
+        "logo_media_id": { "type": "integer|null" },
+        "logo_dark_media_id": { "type": "integer|null" },
+        "favicon_media_id": { "type": "integer|null" },
+        "copyright_text": { "type": "localized_6lang", "required": true }
+      }
+    },
+    "contact_info": {
+      "setting_group": "contact",
+      "is_public": true,
+      "fields": {
+        "whatsapp_number": { "type": "string", "format": "e164_digits", "note": "Powers dynamic wa.me links across the public website." },
+        "mobile_number": { "type": "string", "format": "phone" },
+        "email_address": { "type": "string", "format": "email" },
+        "physical_address": { "type": "localized_6lang" },
+        "working_hours": { "type": "localized_6lang" },
+        "show_whatsapp_floating_cta": { "type": "boolean" },
+        "visible_channels": { "type": "array", "items": ["whatsapp", "phone", "email", "address", "hours"] }
+      }
+    },
+    "navigation_layout": {
+      "setting_group": "navigation",
+      "is_public": true,
+      "fields": {
+        "header_links": { "type": "array", "itemShape": { "url": "string", "labels": "localized_6lang", "open_in_new_tab": "boolean" } },
+        "footer_columns": { "type": "array", "itemShape": { "title": "localized_6lang", "links": "array" } },
+        "social_links": { "type": "object", "keys": ["facebook", "instagram", "linkedin", "x", "youtube", "tiktok"] },
+        "homepage_layout_mode": { "type": "string" }
+      }
+    },
+    "languages_config": {
+      "setting_group": "localization",
+      "is_public": true,
+      "fields": {
+        "default_language": { "enum": ["ar", "en", "fr", "ru", "de", "es"] },
+        "enabled_languages": { "type": "array", "default": ["ar", "en", "fr", "ru", "de", "es"] }
+      }
+    },
+    "seo_global": {
+      "setting_group": "seo",
+      "is_public": true,
+      "fields": {
+        "default_title": { "type": "localized_6lang" },
+        "default_description": { "type": "localized_6lang" },
+        "og_image_media_id": { "type": "integer|null" },
+        "canonical_origin": { "type": "string", "format": "origin_url" },
+        "sitemap_enabled": { "type": "boolean" },
+        "robots_allow_indexing": { "type": "boolean" },
+        "robots_custom_rules": { "type": "string" }
+      }
+    }
+  }
+}
+

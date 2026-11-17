@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Master Foundation — Multilingual Sitemap Template
+  Generate dynamically from real published pages across ar, en, fr, ru, de, es.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Example per-page multilingual entry pattern:
+  <url>
+    <loc>{{SITE_ORIGIN}}/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="{{SITE_ORIGIN}}/ar/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="{{SITE_ORIGIN}}/en/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="{{SITE_ORIGIN}}/fr/about" />
+    <xhtml:link rel="alternate" hreflang="ru" href="{{SITE_ORIGIN}}/ru/about" />
+    <xhtml:link rel="alternate" hreflang="de" href="{{SITE_ORIGIN}}/de/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="{{SITE_ORIGIN}}/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{SITE_ORIGIN}}/en/about" />
+    <lastmod>YYYY-MM-DD</lastmod>
+  </url>
+  -->
+</urlset>
+

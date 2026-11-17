@@ -1,0 +1,88 @@
+{
+  "project": {
+    "name": "Farm INN",
+    "slug": "farm-inn",
+    "businessType": "hospitality_tourism",
+    "supportedBusinessTypes": [
+      "hospitality_tourism",
+      "import_export",
+      "real_estate",
+      "industrial_factories",
+      "corporate",
+      "professional_services",
+      "custom"
+    ]
+  },
+  "branding": {
+    "logoPath": null,
+    "faviconPath": null,
+    "colorPalette": {
+      "primary": "#2d5a27",
+      "primaryContrast": "#ffffff",
+      "secondary": "#1c2b1a",
+      "accent": "#d97706",
+      "surface": "#ffffff",
+      "surfaceAlt": "#f9fbf9",
+      "text": "#1a2218",
+      "textMuted": "#4b5563"
+    },
+    "typography": {
+      "latinFont": "Plus Jakarta Sans",
+      "arabicFont": "Cairo",
+      "monoFont": "JetBrains Mono"
+    },
+    "designDirection": "Rustic luxury, farm serenity, organic hospitality, earth tones with modern clean typography."
+  },
+  "languages": {
+    "default": "en",
+    "enabled": ["ar", "en"],
+    "rtlLanguages": ["ar"],
+    "disabled": ["fr", "ru", "de", "es"]
+  },
+  "pages": {
+    "core": ["home", "about", "contact", "privacy-policy", "terms"],
+    "custom": ["accommodations", "experiences", "dining", "gallery", "booking-inquiry"]
+  },
+  "modules": {
+    "available": [
+      "hospitality_booking",
+      "tourism",
+      "corporate_services"
+    ],
+    "enabled": ["hospitality_booking", "tourism"]
+  },
+  "hostingAndDatabase": {
+    "hostingType": "VPS Hostinger",
+    "databaseEngine": "PostgreSQL 15+",
+    "os": "Ubuntu Linux",
+    "processManager": "PM2 / systemd",
+    "reverseProxy": "Nginx",
+    "notes": "VPS Hostinger deployment using PostgreSQL 15+ and Node.js LTS"
+  },
+  "authentication": {
+    "adminLoginEnabled": true,
+    "publicRegistrationEnabled": false,
+    "emailVerificationRequired": true,
+    "passwordResetEnabled": true,
+    "smtpRequiredForEmailFeatures": true
+  },
+  "integrations": {
+    "emailProvider": "smtp_via_env",
+    "whatsappLink": true,
+    "maps": null
+  },
+  "contactDefaults": {
+    "note": "Manage live contact values centrally in Website Settings via the admin dashboard once DB is connected.",
+    "publicEmail": "info@farminn.com",
+    "mobileNumber": "",
+    "whatsappNumber": "",
+    "physicalAddress": "",
+    "workingHours": ""
+  },
+  "deployment": {
+    "primaryDomain": "",
+    "sslRequiredInProduction": true,
+    "environment": "development"
+  }
+}
+

@@ -1,0 +1,87 @@
+{
+  "_templateNotice": "Copy this example to config/project.config.json inside a copied project and customize per client. Never put secrets or credentials here.",
+  "project": {
+    "name": "Example Business Website",
+    "slug": "example-business",
+    "businessType": "corporate",
+    "supportedBusinessTypes": [
+      "import_export",
+      "tourism",
+      "real_estate",
+      "industrial_factories",
+      "corporate",
+      "professional_services",
+      "custom"
+    ]
+  },
+  "branding": {
+    "logoPath": null,
+    "faviconPath": null,
+    "colorPalette": {
+      "primary": "#1d4ed8",
+      "primaryContrast": "#ffffff",
+      "secondary": "#0f172a",
+      "accent": "#0ea5e9",
+      "surface": "#ffffff",
+      "surfaceAlt": "#f8fafc",
+      "text": "#0f172a",
+      "textMuted": "#475569"
+    },
+    "typography": {
+      "latinFont": "Inter",
+      "arabicFont": "Cairo",
+      "monoFont": "JetBrains Mono"
+    },
+    "designDirection": "Customize layout structure, visual style, and homepage sections to fit the client industry."
+  },
+  "languages": {
+    "default": "en",
+    "enabled": ["ar", "en", "fr", "ru", "de", "es"],
+    "rtlLanguages": ["ar"]
+  },
+  "pages": {
+    "core": ["home", "about", "contact", "privacy-policy", "terms"],
+    "custom": []
+  },
+  "modules": {
+    "available": [
+      "import_export",
+      "tourism",
+      "real_estate",
+      "industrial_factories",
+      "corporate_services"
+    ],
+    "enabled": []
+  },
+  "hostingAndDatabase": {
+    "hostingType": "verify_before_selection",
+    "databaseEngine": "verify_before_selection",
+    "notes": "Shared Hosting defaults to mysql/mariadb; VPS/Dedicated defaults to postgresql. One primary database per project."
+  },
+  "authentication": {
+    "adminLoginEnabled": true,
+    "publicRegistrationEnabled": false,
+    "emailVerificationRequired": true,
+    "passwordResetEnabled": true,
+    "smtpRequiredForEmailFeatures": true
+  },
+  "integrations": {
+    "emailProvider": "smtp_via_env",
+    "analytics": null,
+    "maps": null
+  },
+  "contactDefaults": {
+    "note": "Manage live contact values centrally in Website Settings via the admin dashboard once DB is connected.",
+    "publicEmail": "",
+    "mobileNumber": "",
+    "whatsappNumber": "",
+    "physicalAddress": "",
+    "workingHours": ""
+  },
+  "deployment": {
+    "primaryDomain": "",
+    "sslRequiredInProduction": true,
+    "environment": "unconfigured"
+  }
+}
+

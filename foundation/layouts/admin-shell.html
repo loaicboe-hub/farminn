@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="admin.metaTitle">Admin Dashboard Shell Blueprint</title>
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="../design-system/base.css">
+  <link rel="stylesheet" href="../design-system/components.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <div class="drawer-backdrop" data-admin-backdrop hidden></div>
+    <aside id="admin-sidebar" class="admin-sidebar" aria-label="Admin Navigation" data-open="false">
+      <div class="admin-sidebar__brand cluster" style="justify-content: space-between;">
+        <span data-i18n="admin.brand">Admin Foundation</span>
+        <button type="button" class="btn btn--ghost btn--sm admin-sidebar-toggle" data-admin-sidebar-close style="color: #fff;">&times;</button>
+      </div>
+
+      <span class="admin-sidebar__section-label" data-i18n="admin.groupCore">Dashboard</span>
+      <a class="admin-nav-link" href="#overview" aria-current="page" data-i18n="admin.nav.overview">Overview</a>
+
+      <span class="admin-sidebar__section-label" data-i18n="admin.groupPublishing">Content &amp; Localization</span>
+      <a class="admin-nav-link" href="#website-content" data-i18n="admin.nav.websiteContent">Website Content</a>
+      <a class="admin-nav-link" href="#pages-management" data-i18n="admin.nav.pagesManagement">Pages Management</a>
+      <a class="admin-nav-link" href="#media-library" data-i18n="admin.nav.mediaLibrary">Media Library</a>
+      <a class="admin-nav-link" href="#translations" data-i18n="admin.nav.translations">Translations (6 Languages)</a>
+
+      <span class="admin-sidebar__section-label" data-i18n="admin.groupConfiguration">Website Configuration</span>
+      <a class="admin-nav-link" href="#website-settings" data-i18n="admin.nav.websiteSettings">Website Settings</a>
+      <a class="admin-nav-link" href="#contact-information" data-i18n="admin.nav.contactInfo">Contact Information</a>
+      <a class="admin-nav-link" href="#seo-settings" data-i18n="admin.nav.seoSettings">SEO Settings</a>
+
+      <span class="admin-sidebar__section-label" data-i18n="admin.groupSecurity">Access &amp; Security</span>
+      <a class="admin-nav-link" href="#user-management" data-i18n="admin.nav.userManagement">User Management</a>
+      <a class="admin-nav-link" href="#roles-permissions" data-i18n="admin.nav.rolesPermissions">Roles &amp; Permissions</a>
+
+      <span class="admin-sidebar__section-label" data-i18n="admin.groupPersonal">Personal Account</span>
+      <a class="admin-nav-link" href="#account-settings" data-i18n="admin.nav.accountSettings">Account Settings</a>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="cluster">
+          <button type="button" class="btn btn--secondary admin-sidebar-toggle" data-admin-sidebar-open aria-controls="admin-sidebar" aria-expanded="false">
+            <span data-i18n="common.menu">Menu</span>
+          </button>
+          <strong data-i18n="admin.nav.overview">Overview</strong>
+        </div>
+
+        <div class="cluster">
+          <label class="sr-only" for="admin-lang-select" data-i18n="common.selectLanguage">Select language</label>
+          <select id="admin-lang-select" class="lang-select" data-lang-switcher>
+            <option value="ar">العربية (AR)</option>
+            <option value="en" selected>English (EN)</option>
+            <option value="fr">Français (FR)</option>
+            <option value="ru">Русский (RU)</option>
+            <option value="de">Deutsch (DE)</option>
+            <option value="es">Español (ES)</option>
+          </select>
+          <a class="btn btn--ghost btn--sm" href="#account-settings" data-i18n="admin.nav.accountSettings">Account Settings</a>
+        </div>
+      </header>
+
+      <main class="admin-content stack">
+        <div class="alert alert--warning" role="status">
+          <strong data-i18n="admin.blueprintTitle">Blueprint Shell Only — Backend Not Connected:</strong>
+          <span data-i18n="admin.blueprintWarning">
+            Authentication, RBAC enforcement, database queries, and SMTP delivery must be implemented on the server before production use. No fabricated statistics are displayed.
+          </span>
+        </div>
+
+        <!-- 1. Overview -->
+        <section id="overview" class="grid grid--cols-4">
+          <article class="card">
+            <div class="card__subtitle" data-i18n="admin.metrics.pagesCount">Published Pages</div>
+            <div class="metric-value" data-metric="published_pages_count">&mdash;</div>
+            <span class="badge badge--warning" data-i18n="admin.metrics.requiresDb">Requires Database Query</span>
+          </article>
+          <article class="card">
+            <div class="card__subtitle" data-i18n="admin.metrics.mediaCount">Media Assets</div>
+            <div class="metric-value" data-metric="media_items_count">&mdash;</div>
+            <span class="badge badge--warning" data-i18n="admin.metrics.requiresDb">Requires Database Query</span>
+          </article>
+          <article class="card">
+            <div class="card__subtitle" data-i18n="admin.metrics.usersCount">Active Users</div>
+            <div class="metric-value" data-metric="active_users_count">&mdash;</div>
+            <span class="badge badge--warning" data-i18n="admin.metrics.requiresDb">Requires Database Query</span>
+          </article>
+          <article class="card">
+            <div class="card__subtitle" data-i18n="admin.metrics.missingTranslations">Unverified / Missing Translations</div>
+            <div class="metric-value" data-metric="unverified_translations_count">&mdash;</div>
+            <span class="badge badge--info" data-i18n="admin.metrics.trackPerLanguage">Tracked Across 6 Languages</span>
+          </article>
+        </section>
+
+        <!-- 2. Website Content -->
+        <section id="website-content" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.websiteContent">Website Content</h2>
+              <p class="card__subtitle">Homepage sections, headings, descriptions, banners, and CTAs across all 6 languages (`homepage_sections`).</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Connect to `/api/admin/sections` with `content.view` / `content.edit` permissions.</p>
+        </section>
+
+        <!-- 3. Pages Management -->
+        <section id="pages-management" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.pagesManagement">Pages Management</h2>
+              <p class="card__subtitle">Create/edit pages, toggle visibility, manage localized slugs, SEO metadata, and per-language translations (`pages` + `page_translations`).</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Connect to `/api/admin/pages` with `pages.view` / `pages.create` / `pages.edit` / `pages.publish`.</p>
+        </section>
+
+        <!-- 4. Media Library -->
+        <section id="media-library" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.mediaLibrary">Media Library</h2>
+              <p class="card__subtitle">Upload, preview, organize, and replace images/documents with extension, MIME, size, and magic-byte validation (`media_items`).</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Enforce `upload-policy.mjs` rules and store files outside executable public webroots.</p>
+        </section>
+
+        <!-- 5. Translations Tracker -->
+        <section id="translations" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.translations">Translations (6 Languages)</h2>
+              <p class="card__subtitle">Track missing and unverified strings (`is_verified = false`) across Arabic (RTL) and English, French, Russian, German, Spanish (LTR).</p>
+            </div>
+            <span class="badge badge--info" data-i18n="admin.metrics.trackPerLanguage">Tracked Across 6 Languages</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Language</th>
+                  <th>Direction</th>
+                  <th>Missing Keys</th>
+                  <th>Unverified Strings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Arabic (ar)</td><td>RTL</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>English (en)</td><td>LTR</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>French (fr)</td><td>LTR</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>Russian (ru)</td><td>LTR</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>German (de)</td><td>LTR</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>Spanish (es)</td><td>LTR</td><td>&mdash;</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 6. Website Settings -->
+        <section id="website-settings" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.websiteSettings">Website Settings</h2>
+              <p class="card__subtitle" data-i18n="admin.websiteSettingsDesc">
+                Centralized business settings (site name, logo, favicon, header/footer, navigation, WhatsApp, contact channels, languages). Separate from Account Settings.
+              </p>
+            </div>
+            <span class="badge" data-i18n="admin.backendRequired">Server Endpoint Required</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th data-i18n="admin.table.settingGroup">Group</th>
+                  <th data-i18n="admin.table.managedFields">Managed Fields</th>
+                  <th data-i18n="admin.table.status">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-i18n="admin.settingsGroups.identity">Brand &amp; Identity</td>
+                  <td>Website name (6 langs), logo, favicon, copyright text (6 langs)</td>
+                  <td><span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="admin.settingsGroups.contact">Contact Information</td>
+                  <td>WhatsApp number, mobile, email, physical address (6 langs), working hours (6 langs)</td>
+                  <td><span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="admin.settingsGroups.seo">SEO &amp; Indexing</td>
+                  <td>Global titles, descriptions, OG tags, sharing image, sitemap, robots</td>
+                  <td><span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7. Contact Information -->
+        <section id="contact-information" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.contactInfo">Contact Information</h2>
+              <p class="card__subtitle">Centralized WhatsApp, phone, email, address, working hours, and public inquiry triage (`contact_inquiries` + `website_settings`).</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Updates here dynamically update public `wa.me`, `tel:`, `mailto:`, header, and footer links across the website.</p>
+        </section>
+
+        <!-- 8. SEO Settings -->
+        <section id="seo-settings" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.seoSettings">SEO Settings</h2>
+              <p class="card__subtitle">Global &amp; per-language titles, meta descriptions, Open Graph tags, social sharing images, canonical URLs, sitemap, and robots configuration.</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Backed by `seo-meta.mjs` patterns and `website_settings` (`seo_global`).</p>
+        </section>
+
+        <!-- 9. User Management -->
+        <section id="user-management" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.userManagement">User Management</h2>
+              <p class="card__subtitle">View users, create authorized accounts, edit profiles, activate/deactivate accounts, assign roles, and review `security_events` activity.</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Requires server-side `users.*` RBAC checks and protection preventing non-`super_admin` modification of `super_admin` accounts.</p>
+        </section>
+
+        <!-- 10. Roles & Permissions -->
+        <section id="roles-permissions" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.rolesPermissions">Roles &amp; Permissions</h2>
+              <p class="card__subtitle">Manage `super_admin`, `admin`, `editor`, and optional project-specific roles (`roles` + `role_permissions`).</p>
+            </div>
+            <span class="badge badge--warning" data-i18n="admin.status.awaitingBackend">Awaiting Backend Integration</span>
+          </div>
+          <p class="form-hint">Permissions defined in `config/rbac.json` must always be enforced on the backend.</p>
+        </section>
+
+        <!-- 11. Account Settings (Personal Account — Strictly Separate from Website Settings) -->
+        <section id="account-settings" class="card stack">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title" data-i18n="admin.nav.accountSettings">Account Settings</h2>
+              <p class="card__subtitle" data-i18n="admin.accountSettingsDesc">
+                Personal profile, email, mobile number, avatar, password change (with current-password verification), and active session revocation for the logged-in administrator.
+              </p>
+            </div>
+            <span class="badge badge--info" data-i18n="admin.separateFromWebsiteSettings">Separate From Website Settings</span>
+          </div>
+
+          <form class="form-grid" action="/api/admin/account" method="post" data-blueprint-form>
+            <div class="grid grid--cols-2">
+              <div class="form-field">
+                <label class="form-label" for="account-name" data-i18n="form.fullName">Full Name</label>
+                <input class="form-control" id="account-name" name="full_name" type="text" autocomplete="name" disabled placeholder="Populated from authenticated DB user">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="account-email" data-i18n="form.email">Email Address</label>
+                <input class="form-control" id="account-email" name="email" type="email" autocomplete="email" disabled placeholder="Requires current password + email verification">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="account-mobile" data-i18n="admin.account.profileMobile">Mobile Number</label>
+                <input class="form-control" id="account-mobile" name="mobile_number" type="tel" autocomplete="tel" disabled placeholder="Populated from authenticated DB user">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="account-pref-lang" data-i18n="admin.account.preferredLang">Preferred Language</label>
+                <select class="form-control" id="account-pref-lang" name="preferred_language" disabled>
+                  <option value="ar">العربية (AR)</option>
+                  <option value="en" selected>English (EN)</option>
+                  <option value="fr">Français (FR)</option>
+                  <option value="ru">Русский (RU)</option>
+                  <option value="de">Deutsch (DE)</option>
+                  <option value="es">Español (ES)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="account-avatar" data-i18n="admin.account.profileAvatar">Profile Picture</label>
+              <input class="form-control" id="account-avatar" name="avatar" type="file" accept="image/jpeg,image/png,image/webp,image/avif" disabled>
+            </div>
+
+            <div class="grid grid--cols-3">
+              <div class="form-field">
+                <label class="form-label" for="account-current-pw" data-i18n="form.currentPassword">Current Password</label>
+                <input class="form-control" id="account-current-pw" name="current_password" type="password" autocomplete="current-password" disabled>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="account-new-pw" data-i18n="form.newPassword">New Password</label>
+                <input class="form-control" id="account-new-pw" name="new_password" type="password" autocomplete="new-password" disabled>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="account-confirm-pw" data-i18n="form.confirmPassword">Confirm Password</label>
+                <input class="form-control" id="account-confirm-pw" name="confirm_password" type="password" autocomplete="new-password" disabled>
+              </div>
+            </div>
+
+            <div class="cluster">
+              <button type="submit" id="account-save-profile" class="btn btn--primary" disabled data-i18n="common.save">Save Changes</button>
+              <button type="button" id="account-change-password" class="btn btn--secondary" disabled data-i18n="admin.account.changePassword">Change Password (Requires Current Password &amp; Auth Backend)</button>
+              <button type="button" id="account-revoke-sessions" class="btn btn--danger" disabled data-i18n="admin.account.revokeSessions">Log Out Other Active Sessions</button>
+            </div>
+          </form>
+
+          <div>
+            <h3 style="font-size: var(--text-base);" data-i18n="admin.account.activeSessions">Active Sessions</h3>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Session</th>
+                    <th>IP Address</th>
+                    <th>Last Seen</th>
+                    <th>Expires</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="4">Requires server-side `user_sessions` query.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="./shell.js"></script>
+</body>
+</html>

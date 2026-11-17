@@ -1,0 +1,20 @@
+[Unit]
+Description=FARMINN Agricultural Marketplace Application
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/farminn
+Environment=NODE_ENV=production
+Environment=PORT=4000
+ExecStart=/usr/bin/node /var/www/farminn/server.mjs
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=farminn
+
+[Install]
+WantedBy=multi-user.target
+

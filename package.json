@@ -1,0 +1,26 @@
+{
+  "name": "farminn",
+  "version": "1.0.0",
+  "description": "FARMINN — Agricultural Marketplace & Farm Management Platform",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "audit:i18n": "node foundation/i18n/translation-audit.mjs",
+    "test:security": "node foundation/security/security-regression.mjs"
+  },
+  "keywords": [
+    "farminn",
+    "agriculture",
+    "marketplace",
+    "farm-management",
+    "egypt",
+    "farms"
+  ],
+  "author": "FARMINN",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "pg": "^8.23.1"
+  }
+}
