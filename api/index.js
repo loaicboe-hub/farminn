@@ -25,6 +25,15 @@ async function ensureDatabaseReady() {
 
 export default async function handler(req, res) {
   try {
+    if (req.headers['x-inspect-farminn'] === '1') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        url: req.url,
+        headers: req.headers
+      }, null, 2));
+      return;
+    }
+
     await ensureDatabaseReady();
 
     // Inspect Vercel headers for original path
