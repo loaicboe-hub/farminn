@@ -236,6 +236,7 @@ const server = http.createServer(async (req, res) => {
         const purpose = queryParams.get('purpose') || queryParams.get('listing');
         const gov = queryParams.get('gov');
         const minArea = parseFloat(queryParams.get('minArea') || '0');
+        const q = queryParams.get('q')?.trim() || '';
 
         let sql = `
           SELECT f.*, l.name_en as gov_name_en, l.name_ar as gov_name_ar,
@@ -262,10 +263,15 @@ const server = http.createServer(async (req, res) => {
           params.push(minArea);
           pIdx++;
         }
+        if (q) {
+          sql += ` AND (f.title_en LIKE $${pIdx} OR f.title_ar LIKE $${pIdx} OR f.description_en LIKE $${pIdx} OR f.description_ar LIKE $${pIdx} OR f.crops LIKE $${pIdx} OR f.city_en LIKE $${pIdx} OR f.city_ar LIKE $${pIdx})`;
+          params.push(`%${q}%`);
+          pIdx++;
+        }
         sql += ' ORDER BY f.is_featured DESC, f.created_at DESC';
 
         const farms = (await db.query(sql, params)).rows;
-        const bodyHtml = renderFarmsPage({ lang, farms, total: farms.length, locations, filters: { purpose, gov, minArea } });
+        const bodyHtml = renderFarmsPage({ lang, farms, total: farms.length, locations, filters: { purpose, gov, minArea, q } });
         const pageHtml = renderShell({ lang, title: lang === 'ar' ? 'المزارع المعروضة' : 'Farm Listings', activeNav: 'farms', user, settings, content: bodyHtml });
         res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
         res.end(pageHtml);

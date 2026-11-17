@@ -9,31 +9,34 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
   const isRtl = lang === 'ar';
 
   return `
-    <!-- Hero Section -->
-    <section style="background: linear-gradient(135deg, #132a13 0%, #1b4332 60%, #2d6a4f 100%); color: #ffffff; padding-block: var(--space-12) var(--space-16); position: relative; overflow: hidden;">
-      <div style="position: absolute; inset: 0; opacity: 0.12; background-image: radial-gradient(#d97706 1px, transparent 1px); background-size: 24px 24px;"></div>
+    <!-- Hero Section with Agricultural Farmland Banner -->
+    <section class="hero-banner-section">
+      <div style="position: absolute; inset: 0; opacity: 0.12; background-image: radial-gradient(#d97706 1px, transparent 1px); background-size: 24px 24px; pointer-events: none;"></div>
       
-      <div class="container stack" style="gap: var(--space-8); position: relative; z-index: 2;">
-        <div style="max-inline-size: 780px;">
-          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(217, 119, 6, 0.2); border: 1px solid rgba(217, 119, 6, 0.4); padding: 6px 14px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; color: #fde68a; margin-bottom: 1rem;">
+      <div class="container stack" style="gap: var(--space-6); position: relative; z-index: 2;">
+        <div style="max-inline-size: 800px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(217, 119, 6, 0.25); border: 1px solid rgba(217, 119, 6, 0.45); padding: 6px 14px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; color: #fde68a; margin-bottom: 0.75rem;">
             <span>★</span> ${isRtl ? 'المنصة المتخصصة الأولى في مصر للأراضي والمزارع' : "Egypt's Premier Dedicated Agricultural Platform"}
           </div>
-          <h1 style="font-size: clamp(2.2rem, 1.8rem + 2vw, 3.4rem); font-weight: 800; line-height: 1.15; color: #ffffff; margin-bottom: 1rem; letter-spacing: -0.02em;">
+          <h1 style="font-size: clamp(2rem, 1.8rem + 2vw, 3.2rem); font-weight: 800; line-height: 1.18; color: #ffffff; margin-bottom: 0.75rem; letter-spacing: -0.02em;">
             ${isRtl ? 'سوق المزارع، الإدارة الاحترافية، وفرص الاستثمار الزراعي' : 'Buy, Sell, and Manage Verified Farms Across Egypt'}
           </h1>
-          <p style="font-size: 1.15rem; color: #d4ebd4; line-height: 1.6; margin: 0;">
+          <p style="font-size: clamp(1rem, 2vw, 1.15rem); color: #d4ebd4; line-height: 1.6; margin: 0;">
             ${isRtl ? 'منصة فارم إن تجمع بين أصحاب المزارع والمستثمرين ومديري المزارع المحترفين وكبرى شركات التوريدات الزراعية في بيئة موثقة وشفافة.' : 'Connect directly with verified farm owners, certified agronomists, joint venture investors, and equipment suppliers.'}
           </p>
         </div>
 
-        <!-- Hero Search Filter Box -->
+        <!-- Hero Search Filter Box with Keyword Search, Purpose, Governorate, and Area -->
         <div class="hero-search-box">
-          <form action="/${lang}/farms" method="GET" class="grid grid--cols-4" style="gap: var(--space-3); align-items: flex-end;">
+          <form action="/${lang}/farms" method="GET" class="hero-filter-grid">
             <div class="form-group" style="margin: 0;">
-              <label class="form-label" style="font-weight: 700; font-size: 0.85rem;">
-                ${isRtl ? 'الغرض' : 'Purpose'}
-              </label>
-              <select name="purpose" class="form-control" style="font-size: 0.9rem;">
+              <label>${isRtl ? 'كلمة البحث / المحصول' : 'Search / Crops'}</label>
+              <input type="text" name="q" placeholder="${isRtl ? 'مثال: زيتون، نخيل، طريق مصر إسكندرية...' : 'e.g. Olives, Dates, Cairo-Alex Road...'}" class="form-control">
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label>${isRtl ? 'الغرض' : 'Purpose'}</label>
+              <select name="purpose" class="form-control">
                 <option value="all">${isRtl ? 'الكل (بيع وإيجار)' : 'All (Sale & Rent)'}</option>
                 <option value="sale">${isRtl ? 'مزارع للبيع' : 'Farms for Sale'}</option>
                 <option value="rent">${isRtl ? 'مزارع للإيجار' : 'Farms for Rent'}</option>
@@ -41,10 +44,8 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
             </div>
 
             <div class="form-group" style="margin: 0;">
-              <label class="form-label" style="font-weight: 700; font-size: 0.85rem;">
-                ${isRtl ? 'المحافظة / النطاق' : 'Governorate / Region'}
-              </label>
-              <select name="gov" class="form-control" style="font-size: 0.9rem;">
+              <label>${isRtl ? 'المحافظة / النطاق' : 'Governorate / Region'}</label>
+              <select name="gov" class="form-control">
                 <option value="all">${isRtl ? 'كافة المحافظات' : 'All Governorates'}</option>
                 ${locations.map(loc => `
                   <option value="${escapeHtml(loc.slug)}">${isRtl ? escapeHtml(loc.name_ar) : escapeHtml(loc.name_en)}</option>
@@ -53,14 +54,12 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
             </div>
 
             <div class="form-group" style="margin: 0;">
-              <label class="form-label" style="font-weight: 700; font-size: 0.85rem;">
-                ${isRtl ? 'أقل مساحة (فدان)' : 'Min Area (Feddan)'}
-              </label>
-              <input type="number" name="minArea" placeholder="${isRtl ? 'مثال: 10' : 'e.g. 10'}" class="form-control" style="font-size: 0.9rem;" min="0">
+              <label>${isRtl ? 'أقل مساحة (فدان)' : 'Min Area (Feddan)'}</label>
+              <input type="number" name="minArea" placeholder="${isRtl ? 'مثال: 10' : 'e.g. 10'}" class="form-control" min="0">
             </div>
 
-            <div>
-              <button type="submit" class="btn btn--primary" style="width: 100%; height: 46px; font-weight: 700; font-size: 1rem; background: var(--color-accent); border-color: var(--color-accent);">
+            <div class="hero-filter-actions">
+              <button type="submit" class="btn btn--primary" style="width: 100%; height: 44px; font-weight: 700; font-size: 1rem; background: var(--color-accent); border-color: var(--color-accent);">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                 ${isRtl ? 'بحث في المزارع' : 'Search Farms'}
               </button>
@@ -330,57 +329,67 @@ export function renderFarmsPage({ lang, farms = [], total = 0, locations = [], f
   const isRtl = lang === 'ar';
 
   return `
-    <div style="background: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); padding-block: var(--space-8);">
-      <div class="container">
-        <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--color-secondary); margin: 0 0 8px;">
-          ${isRtl ? 'سوق المزارع والأراضي الزراعية' : 'Farms Marketplace'}
-        </h1>
-        <p style="color: var(--color-text-muted); margin: 0; font-size: 1.05rem;">
-          ${isRtl ? 'مزارع وأراضٍ مفحوصة وموثقة للبيع والإيجار في كافة المحافظات' : 'Browse inspected and verified farms for sale and lease across Egypt'}
-        </p>
+    <!-- Farms Catalog Hero Banner with Agricultural Farmland Background -->
+    <div class="catalog-hero-banner">
+      <div class="container stack" style="gap: var(--space-5);">
+        <div style="max-inline-size: 800px;">
+          <h1 style="font-size: clamp(1.8rem, 4vw, 2.7rem); font-weight: 800; color: #ffffff; margin: 0 0 8px; line-height: 1.2;">
+            ${isRtl ? 'سوق المزارع والأراضي الزراعية' : 'Farms Marketplace'}
+          </h1>
+          <p style="color: #d1ebd1; margin: 0; font-size: clamp(0.95rem, 2vw, 1.15rem); line-height: 1.5;">
+            ${isRtl ? 'مزارع وأراضٍ مفحوصة وموثقة للبيع والإيجار في كافة المحافظات' : 'Browse inspected and verified farms for sale and lease across Egypt'}
+          </p>
+        </div>
+
+        <!-- Filter & Search Box embedded in Hero Banner -->
+        <div class="hero-search-box">
+          <form action="/${lang}/farms" method="GET" class="hero-filter-grid">
+            <div class="form-group" style="margin: 0;">
+              <label>${isRtl ? 'كلمة البحث / المحصول' : 'Search / Crops'}</label>
+              <input type="text" name="q" value="${escapeHtml(filters.q || '')}" placeholder="${isRtl ? 'مثال: زيتون، نخيل، وادي النطرون...' : 'e.g. Olives, Dates, Desert Road...'}" class="form-control">
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label>${isRtl ? 'الغرض' : 'Listing Purpose'}</label>
+              <select name="purpose" class="form-control">
+                <option value="all" ${filters.purpose === 'all' ? 'selected' : ''}>${isRtl ? 'الكل (بيع وإيجار)' : 'All (Sale & Rent)'}</option>
+                <option value="sale" ${filters.purpose === 'sale' ? 'selected' : ''}>${isRtl ? 'للبيع فقط' : 'For Sale'}</option>
+                <option value="rent" ${filters.purpose === 'rent' ? 'selected' : ''}>${isRtl ? 'للإيجار فقط' : 'For Rent'}</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label>${isRtl ? 'المحافظة' : 'Governorate'}</label>
+              <select name="gov" class="form-control">
+                <option value="all">${isRtl ? 'كافة المحافظات' : 'All Governorates'}</option>
+                ${locations.map(loc => `
+                  <option value="${escapeHtml(loc.slug)}" ${filters.gov === loc.slug ? 'selected' : ''}>
+                    ${isRtl ? escapeHtml(loc.name_ar) : escapeHtml(loc.name_en)}
+                  </option>
+                `).join('')}
+              </select>
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label>${isRtl ? 'أقل مساحة (فدان)' : 'Min Area (Feddan)'}</label>
+              <input type="number" name="minArea" value="${escapeHtml(filters.minArea || '')}" class="form-control" placeholder="0" min="0">
+            </div>
+
+            <div class="hero-filter-actions">
+              <button type="submit" class="btn btn--primary" style="flex: 1; height: 44px; font-weight: 700; font-size: 0.95rem; background: var(--color-accent); border-color: var(--color-accent);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                ${isRtl ? 'تطبيق الفلتر' : 'Filter'}
+              </button>
+              <a href="/${lang}/farms" class="btn btn--ghost" style="height: 44px; border: 1.5px solid #d1d5db; color: #374151; font-weight: 600;">
+                ${isRtl ? 'إعادة ضبط' : 'Reset'}
+              </a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
     <div class="container" style="padding-block: var(--space-8);">
-      <!-- Filter Bar -->
-      <div class="card" style="margin-bottom: var(--space-6); padding: var(--space-4);">
-        <form action="/${lang}/farms" method="GET" class="grid grid--cols-4" style="gap: var(--space-3); align-items: flex-end;">
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label" style="font-weight: 600; font-size: 0.85rem;">${isRtl ? 'الغرض' : 'Listing Purpose'}</label>
-            <select name="purpose" class="form-control" style="font-size: 0.9rem;">
-              <option value="all" ${filters.purpose === 'all' ? 'selected' : ''}>${isRtl ? 'الكل (بيع وإيجار)' : 'All (Sale & Rent)'}</option>
-              <option value="sale" ${filters.purpose === 'sale' ? 'selected' : ''}>${isRtl ? 'للبيع فقط' : 'For Sale'}</option>
-              <option value="rent" ${filters.purpose === 'rent' ? 'selected' : ''}>${isRtl ? 'للإيجار فقط' : 'For Rent'}</option>
-            </select>
-          </div>
-
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label" style="font-weight: 600; font-size: 0.85rem;">${isRtl ? 'المحافظة' : 'Governorate'}</label>
-            <select name="gov" class="form-control" style="font-size: 0.9rem;">
-              <option value="all">${isRtl ? 'كافة المحافظات' : 'All Governorates'}</option>
-              ${locations.map(loc => `
-                <option value="${escapeHtml(loc.slug)}" ${filters.gov === loc.slug ? 'selected' : ''}>
-                  ${isRtl ? escapeHtml(loc.name_ar) : escapeHtml(loc.name_en)}
-                </option>
-              `).join('')}
-            </select>
-          </div>
-
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label" style="font-weight: 600; font-size: 0.85rem;">${isRtl ? 'أقل مساحة (فدان)' : 'Min Area (Feddan)'}</label>
-            <input type="number" name="minArea" value="${escapeHtml(filters.minArea || '')}" class="form-control" placeholder="0" style="font-size: 0.9rem;">
-          </div>
-
-          <div class="cluster" style="gap: 8px;">
-            <button type="submit" class="btn btn--primary" style="flex: 1; height: 42px;">
-              ${isRtl ? 'تطبيق الفلتر' : 'Filter'}
-            </button>
-            <a href="/${lang}/farms" class="btn btn--ghost" style="height: 42px;">
-              ${isRtl ? 'إعادة ضبط' : 'Reset'}
-            </a>
-          </div>
-        </form>
-      </div>
 
       <!-- Result header -->
       <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-6);">

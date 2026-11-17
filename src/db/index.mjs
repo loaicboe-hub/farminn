@@ -72,11 +72,23 @@ class DatabaseAdapter {
       };
     }
 
+    // Normalize params (objects to JSON strings, booleans to 1/0)
+    const normalizedParams = params.map(p => {
+      if (typeof p === 'boolean') return p ? 1 : 0;
+      if (p !== null && typeof p === 'object') return JSON.stringify(p);
+      return p;
+    });
+
     // SQLite adapter emulation:
-    // Convert PostgreSQL $1, $2, ... placeholders to ?
+    // Convert PostgreSQL $1, $2, ... placeholders to ? with remapped parameter indices
     let sqliteQuery = text;
-    // Replace $1, $2 etc with ?
-    sqliteQuery = sqliteQuery.replace(/\$[0-9]+/g, '?');
+    const remappedParams = [];
+    sqliteQuery = sqliteQuery.replace(/\$([0-9]+)/g, (match, num) => {
+      const idx = parseInt(num, 10) - 1;
+      remappedParams.push(normalizedParams[idx]);
+      return '?';
+    });
+
     // Replace NOW() with datetime('now')
     sqliteQuery = sqliteQuery.replace(/\bNOW\(\)/gi, "datetime('now')");
     // Replace TIMESTAMPTZ / BIGSERIAL / JSONB compatibility in DDL
@@ -86,20 +98,13 @@ class DatabaseAdapter {
     sqliteQuery = sqliteQuery.replace(/\bBOOLEAN\b/gi, 'INTEGER');
     sqliteQuery = sqliteQuery.replace(/\bTRUE\b/gi, '1');
     sqliteQuery = sqliteQuery.replace(/\bFALSE\b/gi, '0');
-    // Remove DO $$ ... $$; and PostgreSQL triggers if present in raw execution
-    
-    // Normalize params (objects to JSON strings, booleans to 1/0)
-    const normalizedParams = params.map(p => {
-      if (typeof p === 'boolean') return p ? 1 : 0;
-      if (p !== null && typeof p === 'object') return JSON.stringify(p);
-      return p;
-    });
 
     try {
       const isSelect = /^\s*(SELECT|PRAGMA|WITH)/i.test(sqliteQuery);
       if (isSelect) {
+        const finalParams = remappedParams.length > 0 ? remappedParams : normalizedParams;
         const stmt = this.sqliteDb.prepare(sqliteQuery);
-        const rows = stmt.all(...normalizedParams);
+        const rows = stmt.all(...finalParams);
         // Normalize rows (parse JSON fields or numeric strings if needed)
         for (const row of rows) {
           for (const key of Object.keys(row)) {
@@ -110,8 +115,9 @@ class DatabaseAdapter {
         }
         return { rows, rowCount: rows.length };
       } else {
+        const finalParams = remappedParams.length > 0 ? remappedParams : normalizedParams;
         const stmt = this.sqliteDb.prepare(sqliteQuery);
-        const result = stmt.run(...normalizedParams);
+        const result = stmt.run(...finalParams);
         return {
           rows: [],
           rowCount: Number(result.changes),

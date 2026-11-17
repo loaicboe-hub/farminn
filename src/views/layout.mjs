@@ -142,12 +142,127 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
       color: #ffffff;
       text-decoration: underline;
     }
+    /* Agricultural Hero Banner & Responsive Filter Box */
+    .hero-banner-section {
+      position: relative;
+      background-color: #132a13;
+      background-image: linear-gradient(180deg, rgba(15, 33, 15, 0.74) 0%, rgba(20, 48, 35, 0.86) 100%), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+      padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3rem, 6vw, 5.5rem);
+      overflow: hidden;
+    }
+    .catalog-hero-banner {
+      position: relative;
+      background-color: #132a13;
+      background-image: linear-gradient(180deg, rgba(15, 33, 15, 0.76) 0%, rgba(20, 48, 35, 0.88) 100%), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+      padding-block: clamp(2.2rem, 5vw, 3.8rem) clamp(2.5rem, 6vw, 4.2rem);
+      overflow: hidden;
+    }
     .hero-search-box {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
       border-radius: var(--radius-lg);
-      padding: var(--space-4);
-      box-shadow: 0 20px 40px -15px rgba(27, 67, 50, 0.15);
-      border: 1px solid var(--color-border);
+      padding: clamp(14px, 3vw, 22px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      color: var(--color-text);
+    }
+    .hero-search-box label {
+      color: #1f2937;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .hero-search-box .form-control {
+      background: #ffffff;
+      border: 1.5px solid #d1d5db;
+      color: #111827;
+      font-size: 0.95rem;
+      height: 44px;
+      border-radius: 8px;
+      padding-inline: 12px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .hero-search-box .form-control:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.15);
+      outline: none;
+    }
+
+    /* Mobile & Responsive Layouts for Hero Filter */
+    @media (max-width: 767px) {
+      .hero-banner-section, .catalog-hero-banner {
+        padding-block: 2rem 2.2rem;
+        background-position: center top;
+      }
+      .hero-search-box {
+        padding: 14px;
+        border-radius: 12px;
+      }
+      .hero-filter-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+      }
+      .hero-filter-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-top: 4px;
+      }
+      .hero-filter-actions .btn {
+        width: 100% !important;
+        height: 44px !important;
+        font-size: 1rem !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-filter-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        align-items: flex-end !important;
+      }
+      .hero-filter-actions {
+        grid-column: span 2;
+        display: flex;
+        gap: 10px;
+      }
+      .hero-filter-actions .btn {
+        flex: 1;
+        height: 44px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .hero-filter-grid {
+        display: grid !important;
+        grid-template-columns: 1.4fr 1fr 1fr 0.9fr 1.2fr !important;
+        gap: 12px !important;
+        align-items: flex-end !important;
+      }
+      .hero-filter-actions {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+      }
+      .hero-filter-actions .btn {
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
     .farm-card {
       background: #ffffff;
