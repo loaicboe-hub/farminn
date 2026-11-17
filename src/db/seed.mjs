@@ -183,8 +183,8 @@ export async function seedDatabase() {
         status: 'approved',
         is_featured: 1,
         contact_name: 'Eng. Hisham El-Gammal',
-        contact_phone: '+201004567891',
-        contact_whatsapp: '+201004567891',
+        contact_phone: '+201004491026',
+        contact_whatsapp: '+201004491026',
         images: [
           'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
           'https://images.unsplash.com/photo-1592417817098-8f3d6910985c?auto=format&fit=crop&w=1200&q=80',
@@ -219,8 +219,8 @@ export async function seedDatabase() {
         status: 'approved',
         is_featured: 1,
         contact_name: 'Advisor Sherif Kamel',
-        contact_phone: '+201223344556',
-        contact_whatsapp: '+201223344556',
+        contact_phone: '+201004491026',
+        contact_whatsapp: '+201004491026',
         images: [
           'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1200&q=80',
           'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1200&q=80',
@@ -255,8 +255,8 @@ export async function seedDatabase() {
         status: 'approved',
         is_featured: 1,
         contact_name: 'Hajj Mahmoud El-Miniawy',
-        contact_phone: '+201149876543',
-        contact_whatsapp: '+201149876543',
+        contact_phone: '+201004491026',
+        contact_whatsapp: '+201004491026',
         images: [
           'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80',
           'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1200&q=80'
@@ -290,8 +290,8 @@ export async function seedDatabase() {
         status: 'approved',
         is_featured: 0,
         contact_name: 'Captain Youssef Fahmy',
-        contact_phone: '+201019871234',
-        contact_whatsapp: '+201019871234',
+        contact_phone: '+201004491026',
+        contact_whatsapp: '+201004491026',
         images: [
           'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80',
           'https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=1200&q=80'
@@ -325,8 +325,8 @@ export async function seedDatabase() {
         status: 'approved',
         is_featured: 1,
         contact_name: 'Dr. Taha El-Nouby',
-        contact_phone: '+201551234567',
-        contact_whatsapp: '+201551234567',
+        contact_phone: '+201004491026',
+        contact_whatsapp: '+201004491026',
         images: [
           'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
           'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80'
@@ -403,8 +403,8 @@ export async function seedDatabase() {
         'EGP 25,000 - 35,000 / month + 10% Profit Share',
         'Owner resides abroad. Seeking an experienced agricultural engineer or management team to take full charge of production, pest control, and harvest contracts.',
         'Hajj Mansour El-Gebali',
-        '+201115554321',
-        '+201115554321'
+        '+20100000000',
+        '+20100000000'
       ]
     );
 
@@ -418,7 +418,7 @@ export async function seedDatabase() {
         reqId,
         adminUserId,
         'Eng. Tarek Mansour (Agronomist Consultant)',
-        '+201099887766',
+        '+20100000000',
         28000.0,
         'fixed_monthly_plus_percentage',
         12,
@@ -452,8 +452,8 @@ export async function seedDatabase() {
         'Expected ROI starting year 4. Official partnership contract notarized with judicial security deposit.',
         'العائد المتوقع يبدأ من العام الرابع بمعدل تصديري مرتفع. توثيق رسمي للشراكة وحصص الأرباح بالشهر العقاري.',
         'Hajj Mansour El-Gebali',
-        '+201115554321',
-        '+201115554321'
+        '+20100000000',
+        '+20100000000'
       ]
     );
   }
@@ -469,8 +469,8 @@ export async function seedDatabase() {
         category: 'irrigation',
         desc_en: 'Official distributor of high-durability drip tubing, Netafim valves, screen filters, and deep-well submersible pumps in Egypt.',
         desc_ar: 'وكيل وموزع معتمد لخراطيم الري بالتنقيط عالية التحمل، محابس وفلاتر نيتافيم، وطلمبات الآبار الارتوازية الغاطسة في مصر.',
-        phone: '+201020304050',
-        whatsapp: '+201020304050',
+        phone: '+20100000000',
+        whatsapp: '+20100000000',
         email: 'sales@deltareyy.com',
         products: ['Netafim Drip Lines', 'Fertilizer Venturi Pumps', 'Deep Well Turbines', 'Centrifugal Gravel Filters'],
         logo: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=600&q=80'
@@ -482,8 +482,8 @@ export async function seedDatabase() {
         category: 'solar-energy',
         desc_en: 'Turnkey solar pumping systems from 15 HP to 150 HP for agricultural wells in Wadi El-Natrun, Minya, and Farafra with 25-year panel warranty.',
         desc_ar: 'محطات طاقة شمسية متكاملة لتشغيل طلمبات الآبار من 15 إلى 150 حصان في وادي النطرون والمنيا والفرافرة مع ضمان 25 سنة على الألواح.',
-        phone: '+201090807060',
-        whatsapp: '+201090807060',
+        phone: '+20100000000',
+        whatsapp: '+20100000000',
         email: 'info@sunagro-eg.com',
         products: ['Tier-1 Monocrystalline Solar Panels', 'Fuji / INVT Solar Inverters', 'Galvanized Mounting Structures'],
         logo: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600&q=80'
@@ -495,8 +495,8 @@ export async function seedDatabase() {
         category: 'fertilizers',
         desc_en: 'Certified tissue-culture date palm offsets (Medjool, Barhi, Siwi) with virus-free ministry certifications and planting support.',
         desc_ar: 'فسائل وشتلات نخيل نسيجي معتمدة (مجدول، برحي، سيوي) خالية من الفيروسات بشهادات فحص من وزارة الزراعة مع الدعم الفني.',
-        phone: '+201122334455',
-        whatsapp: '+201122334455',
+        phone: '+20100000000',
+        whatsapp: '+20100000000',
         email: 'orders@nilepalms.com',
         products: ['Medjool Palm Offsets', 'Kalamata Olive Trees', 'Citrus Rootstocks'],
         logo: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80'
@@ -534,8 +534,8 @@ export async function seedDatabase() {
         bio_en: 'Bachelor of Agricultural Science from Cairo University. 15 years leading production on major export citrus and mango projects along the Desert Road and Salhiya.',
         bio_ar: 'بكالوريوس علوم زراعية جامعة القاهرة. خبرة 15 عاماً في إدارة مزارع تصدير الموالح والمانجو بكبرى المشاريع الزراعية بالطريق الصحراوي والصالحية.',
         skills: ['Pest Management (IPM)', 'GlobalG.A.P. Certification', 'Irrigation Water Chemistry', 'Export Harvesting'],
-        phone: '+201099887766',
-        whatsapp: '+201099887766',
+        phone: '+20100000000',
+        whatsapp: '+20100000000',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80'
       },
       {
@@ -549,8 +549,8 @@ export async function seedDatabase() {
         bio_en: 'Extensive track record managing multi-hundred feddan properties in Wadi El-Natrun and West Minya. Expert in team management, budgeting, and solar well installations.',
         bio_ar: 'سجل حافل في إدارة مشاريع بمئات الأفدنة بوادي النطرون وغرب المنيا. خبير في إدارة فرق العمل والموازنات التقديرية وتشغيل محطات الطاقة الشمسية.',
         skills: ['Turnkey Farm Setup', 'Farm Budgeting & Cost Control', 'Machinery Fleet Maintenance', 'Center Pivot Systems'],
-        phone: '+201011223344',
-        whatsapp: '+201011223344',
+        phone: '+20100000000',
+        whatsapp: '+20100000000',
         avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80'
       },
       {
@@ -564,8 +564,8 @@ export async function seedDatabase() {
         bio_en: 'Doctorate in Veterinary Medicine. Specialized in preventive vaccination protocols, genetic selection, and nutritional feed formulation for commercial dairy and fattening feedlots.',
         bio_ar: 'دكتوراه في الطب البيطري. متخصص في برامج التحصين الوقائي، تحسين السلالات، وتركيب العلائق الغذائية لمزارع التسمين وإنتاج الألبان الكبرى.',
         skills: ['Feedlot Ration Formulation', 'Herd Herd Vaccination Protocols', 'Artificial Insemination', 'Biosecurity Protocols'],
-        phone: '+201155667788',
-        whatsapp: '+201155667788',
+        phone: '+20100000000',
+        whatsapp: '+20100000000',
         avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80'
       }
     ];
