@@ -62,6 +62,9 @@ export async function app(req, res) {
   const pathname = parsedUrl.pathname;
   const queryParams = parsedUrl.searchParams;
 
+  res.setHeader('x-actual-pathname', pathname);
+  res.setHeader('x-actual-url', req.url);
+
   // 1. Static Asset Serving
   if (
     pathname.startsWith('/foundation/design-system/') ||
@@ -209,8 +212,8 @@ export async function app(req, res) {
       const user = await getSessionUser(req);
       const settings = await getSettingsMap();
 
-      // Home (/:lang or /:lang/)
-      if (subpath === '' || subpath === '/') {
+      // Home (/:lang or /:lang/ or /:lang/index)
+      if (subpath === '' || subpath === '/' || subpath === '/index.js' || subpath === '/index.html' || subpath === '/index') {
         const locations = (await db.query('SELECT id, slug, name_en, name_ar FROM taxonomy_locations WHERE is_active = 1 ORDER BY sort_order')).rows;
         const categories = (await db.query('SELECT id, slug, name_en, name_ar FROM taxonomy_categories WHERE is_active = 1 ORDER BY sort_order')).rows;
         const farms = (await db.query(
