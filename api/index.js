@@ -25,6 +25,8 @@ async function ensureDatabaseReady() {
 
 export default async function handler(req, res) {
   try {
+    res.setHeader('x-from-api-index', 'true');
+    res.setHeader('x-api-req-url', req.url);
     if (req.headers['x-inspect-farminn'] === '1') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({

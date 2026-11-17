@@ -62,8 +62,15 @@ export async function app(req, res) {
   const pathname = parsedUrl.pathname;
   const queryParams = parsedUrl.searchParams;
 
+  res.setHeader('x-from-server-mjs', 'true');
   res.setHeader('x-actual-pathname', pathname);
   res.setHeader('x-actual-url', req.url);
+  res.setHeader('x-headers-keys', Object.keys(req.headers).join(','));
+  for (const k of Object.keys(req.headers)) {
+    try {
+      res.setHeader('x-hdr-' + k.replace(/[^a-zA-Z0-9-]/g, '_'), String(req.headers[k]).substring(0, 80));
+    } catch (e) {}
+  }
 
   // 1. Static Asset Serving
   if (
