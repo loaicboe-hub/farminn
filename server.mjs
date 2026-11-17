@@ -104,11 +104,18 @@ export async function app(req, res) {
       if (handled) return;
     }
 
-    // 3. Root Language Redirection
-    if (pathname === '/') {
+    // 3. Root Language Redirection & Safe Fallbacks
+    if (
+      pathname === '/' ||
+      pathname === '/api/index.js' ||
+      pathname === '/api' ||
+      pathname === '/$1' ||
+      pathname === '/:slug*' ||
+      pathname === '/:path*'
+    ) {
       const cookies = parseCookies(req);
       const userLang = cookies.site_lang || (req.headers['accept-language']?.includes('ar') ? 'ar' : 'en');
-      const targetLang = ['ar', 'en'].includes(userLang) ? userLang : 'en';
+      const targetLang = ['ar', 'en'].includes(userLang) ? userLang : 'ar';
       res.writeHead(302, { Location: `/${targetLang}` });
       res.end();
       return;
@@ -472,8 +479,19 @@ export async function app(req, res) {
     }
 
     // 404 Fallback
+    const cookies = parseCookies(req);
+    const fallbackLang = pathname.startsWith('/ar') ? 'ar' : (pathname.startsWith('/en') ? 'en' : (cookies.site_lang || 'ar'));
+    const isAr = fallbackLang === 'ar';
     res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
-    res.end(renderShell({ lang: 'en', title: 'Page Not Found', content: '<div class="container" style="padding-block: 5rem; text-align: center;"><h1>404 — Page Not Found</h1><p><a href="/en">Return to Home</a></p></div>' }));
+    res.end(renderShell({
+      lang: fallbackLang,
+      title: isAr ? 'الصفحة غير موجودة' : 'Page Not Found',
+      content: `<div class="container" style="padding-block: 5rem; text-align: center;">
+        <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--color-secondary); margin-bottom: 1rem;">404 — ${isAr ? 'الصفحة غير موجودة' : 'Page Not Found'}</h1>
+        <p style="font-size: 1.1rem; color: var(--color-text-muted); margin-bottom: 2rem;">${isAr ? 'عذراً، الصفحة التي تبحث عنها غير متوفرة أو تم نقلها.' : 'Sorry, the page you are looking for is unavailable or has been moved.'}</p>
+        <a href="/${fallbackLang}" class="btn btn--primary" style="height: 44px; padding-inline: 1.5rem; font-weight: 700;">${isAr ? 'العودة للصفحة الرئيسية' : 'Return to Home'}</a>
+      </div>`
+    }));
 
   } catch (err) {
     console.error('[Server Error]', err);
