@@ -755,9 +755,8 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
         </div>
       </div>
 
-      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-4); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #8ba98b;">
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-4); display: flex; justify-content: center; align-items: center; font-size: 0.85rem; color: #8ba98b; text-align: center;">
         <span>&copy; ${new Date().getFullYear()} ${escapeHtml(brandName)}. ${isRtl ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}</span>
-        <span>${isRtl ? 'المنصة تدعم اللغتين: العربية والإنجليزية' : 'Supported Languages: Arabic & English'}</span>
       </div>
     </div>
   </footer>
