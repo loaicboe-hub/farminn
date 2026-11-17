@@ -174,7 +174,7 @@ const arExtensions = {
     myDashboard: "حسابي"
   },
   farminn: {
-    brandName: "فارمين",
+    brandName: "فارم إن",
     tagline: "المنصة الزراعية المتكاملة لسوق وإدارة المزارع",
     exploreFarms: "استكشف المزارع",
     requestManagement: "طلب إدارة مزرعة",
@@ -186,7 +186,7 @@ const arExtensions = {
     statsFeddan: "فدان خاضع للإشراف والإدارة",
     statsManagers: "مهندس وخبير زراعي",
     statsSuppliers: "شركة ومورد معتمد",
-    howItWorksTitle: "كيف تعمل منصة فارمين",
+    howItWorksTitle: "كيف تعمل منصة فارم إن",
     howItWorksStep1Title: "١. فحص وتوثيق معتمد",
     howItWorksStep1Desc: "تخضع كل مزرعة للمعاينة ومراجعة أوراق الملكية ومصادر الري والكهرباء والتربة قبل النشر.",
     howItWorksStep2Title: "٢. إدارة وتشغيل متكامل",

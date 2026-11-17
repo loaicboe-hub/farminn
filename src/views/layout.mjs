@@ -6,7 +6,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
   const otherLang = isRtl ? 'en' : 'ar';
   const otherLangLabel = isRtl ? 'English' : 'العربية';
 
-  const brandName = isRtl ? (settings.site_name_ar || 'فارمين') : (settings.site_name || 'FARMINN');
+  const brandName = isRtl ? (settings.site_name_ar || 'فارم إن') : (settings.site_name || 'FARMINN');
   const tagline = isRtl
     ? (settings.site_tagline_ar || 'المنصة الزراعية المتكاملة لسوق وإدارة المزارع')
     : (settings.site_tagline_en || 'Egypt Premier Agricultural Marketplace & Farm Management Platform');
@@ -313,7 +313,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
             <li><a href="/${lang}/suppliers">${isRtl ? 'دليل شركات الموردين' : 'Suppliers Directory'}</a></li>
             <li><a href="/${lang}/human-resources">${isRtl ? 'الكوادر والمهندسين الزراعيين' : 'Agronomists & Experts'}</a></li>
-            <li><a href="/${lang}/about">${isRtl ? 'عن منصة فارمين' : 'About FARMINN'}</a></li>
+            <li><a href="/${lang}/about">${isRtl ? 'عن منصة فارم إن' : 'About FARMINN'}</a></li>
             <li><a href="/${lang}/contact">${isRtl ? 'اتصل بنا والمعاينة' : 'Contact & Inspection'}</a></li>
             <li><a href="/${lang}/terms">${isRtl ? 'الشروط والأحكام والخصوصية' : 'Terms & Privacy'}</a></li>
           </ul>

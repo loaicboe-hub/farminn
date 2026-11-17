@@ -38,7 +38,7 @@ async function verify() {
 
   // 3. Arabic Homepage
   const arHome = await request(`${base}/ar`);
-  console.log(`[PASS] Arabic Homepage status: ${arHome.status}, dir="rtl": ${arHome.body.includes('dir="rtl"')}, contains فارمين: ${arHome.body.includes('فارمين')}`);
+  console.log(`[PASS] Arabic Homepage status: ${arHome.status}, dir="rtl": ${arHome.body.includes('dir="rtl"')}, contains فارم إن: ${arHome.body.includes('فارم إن')}`);
 
   // 4. Farms Catalog
   const farmsPage = await request(`${base}/en/farms`);

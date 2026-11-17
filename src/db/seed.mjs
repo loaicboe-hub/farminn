@@ -67,7 +67,7 @@ export async function seedDatabase() {
   // 4. Centralized Website Settings
   const settings = [
     { key: 'site_name', value: 'FARMINN', group: 'identity' },
-    { key: 'site_name_ar', value: 'فارمين', group: 'identity' },
+    { key: 'site_name_ar', value: 'فارم إن', group: 'identity' },
     { key: 'site_tagline_en', value: 'Egypt Premier Agricultural Marketplace & Farm Management Platform', group: 'identity' },
     { key: 'site_tagline_ar', value: 'المنصة الرائدة في مصر لسوق وإدارة واستثمار المزارع', group: 'identity' },
     { key: 'contact_email', value: 'info@farminn.com', group: 'contact' },

@@ -18,7 +18,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${isRtl ? 'لوحة تحكم إدارة منصة فارمين' : 'FARMINN Admin Dashboard'}</title>
+  <title>${isRtl ? 'لوحة تحكم إدارة منصة فارم إن' : 'FARMINN Admin Dashboard'}</title>
   <link rel="stylesheet" href="/foundation/design-system/tokens.css">
   <link rel="stylesheet" href="/foundation/design-system/base.css">
   <link rel="stylesheet" href="/foundation/design-system/components.css">
@@ -478,7 +478,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                 </div>
                 <div class="form-group" style="margin: 0;">
                   <label class="form-label">${isRtl ? 'اسم المنصة (عربي)' : 'Platform Name (Arabic)'}</label>
-                  <input type="text" name="site_name_ar" value="${escapeHtml(settingsMap.site_name_ar || 'فارمين')}" class="form-control">
+                  <input type="text" name="site_name_ar" value="${escapeHtml(settingsMap.site_name_ar || 'فارم إن')}" class="form-control">
                 </div>
               </div>
 

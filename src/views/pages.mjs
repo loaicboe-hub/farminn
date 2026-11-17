@@ -22,7 +22,7 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
             ${isRtl ? 'سوق المزارع، الإدارة الاحترافية، وفرص الاستثمار الزراعي' : 'Buy, Sell, and Manage Verified Farms Across Egypt'}
           </h1>
           <p style="font-size: 1.15rem; color: #d4ebd4; line-height: 1.6; margin: 0;">
-            ${isRtl ? 'منصة فارمين تجمع بين أصحاب المزارع والمستثمرين ومديري المزارع المحترفين وكبرى شركات التوريدات الزراعية في بيئة موثقة وشفافة.' : 'Connect directly with verified farm owners, certified agronomists, joint venture investors, and equipment suppliers.'}
+            ${isRtl ? 'منصة فارم إن تجمع بين أصحاب المزارع والمستثمرين ومديري المزارع المحترفين وكبرى شركات التوريدات الزراعية في بيئة موثقة وشفافة.' : 'Connect directly with verified farm owners, certified agronomists, joint venture investors, and equipment suppliers.'}
           </p>
         </div>
 
@@ -115,7 +115,7 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
       <div class="container stack" style="gap: var(--space-8);">
         <div style="text-align: center; max-inline-size: 700px; margin-inline: auto;">
           <h2 style="font-size: 2rem; font-weight: 800; color: var(--color-secondary); margin-bottom: 0.5rem;">
-            ${isRtl ? 'منظومة فارمين المتكاملة' : 'FARMINN Integrated Ecosystem'}
+            ${isRtl ? 'منظومة فارم إن المتكاملة' : 'FARMINN Integrated Ecosystem'}
           </h2>
           <p style="color: var(--color-text-muted); margin: 0;">
             ${isRtl ? 'كل ما تحتاجه لإنجاح استثمارك الزراعي تحت مظلة واحدة آمنة ومدروسة.' : 'Everything you need to buy, manage, and scale your agricultural enterprise.'}
@@ -283,7 +283,7 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
       <div class="container stack" style="gap: var(--space-8);">
         <div style="text-align: center; max-inline-size: 650px; margin-inline: auto;">
           <h2 style="font-size: 2rem; font-weight: 800; color: var(--color-secondary); margin-bottom: 0.5rem;">
-            ${isRtl ? 'كيف تعمل منصة فارمين' : 'How FARMINN Operates'}
+            ${isRtl ? 'كيف تعمل منصة فارم إن' : 'How FARMINN Operates'}
           </h2>
           <p style="color: var(--color-text-muted); margin: 0;">
             ${isRtl ? 'إجراءات احترافية تضمن سلامة الصفقات وتجنيب المستثمرين المخاطر الزراعية والقانونية.' : 'A transparent process ensuring legal compliance, agronomic verification, and successful contracts.'}
@@ -1008,7 +1008,7 @@ export function renderQuickSellPage({ lang, locations = [] }) {
         <div>
           <span class="badge badge--warning">${isRtl ? 'خدمة لملاك المزارع' : 'For Farm Owners'}</span>
           <h1 style="font-size: 2rem; font-weight: 800; color: var(--color-secondary); margin: 8px 0 4px;">
-            ${isRtl ? 'بيع سريع بمساعدة إدارة فارمين' : 'Quick Sell Assisted'}
+            ${isRtl ? 'بيع سريع بمساعدة إدارة فارم إن' : 'Quick Sell Assisted'}
           </h1>
           <p style="color: var(--color-text-muted); margin: 0; line-height: 1.6;">
             ${isRtl ? 'اعرض مزرعتك للبيع السريع مع مساعدة الإدارة في المعاينة ومطابقة المشترين الجادين، مع إمكانية التقسيط أو المبادلة بأصول.' : 'Sell your farm quickly with administrative assistance, matching qualified buyers, with flexible installment or exchange options.'}
@@ -1212,7 +1212,7 @@ export function renderSignInPage({ lang }) {
       <div class="card stack" style="padding: var(--space-8); gap: var(--space-5); background: #ffffff;">
         <div style="text-align: center;">
           <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--color-secondary); margin: 0 0 6px;">
-            ${isRtl ? 'تسجيل الدخول إلى فارمين' : 'Sign In to FARMINN'}
+            ${isRtl ? 'تسجيل الدخول إلى فارم إن' : 'Sign In to FARMINN'}
           </h1>
           <p style="color: var(--color-text-muted); margin: 0; font-size: 0.95rem;">
             ${isRtl ? 'أو أنشئ حساباً جديداً لإدارة مزارعك واستثماراتك' : 'Access your personal dashboard & listings'}
@@ -1467,7 +1467,7 @@ export function renderAboutPage({ lang }) {
     <div style="background: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); padding-block: var(--space-10);">
       <div class="container" style="max-inline-size: 800px;">
         <h1 style="font-size: 2.4rem; font-weight: 800; color: var(--color-secondary); margin: 0 0 10px;">
-          ${isRtl ? 'عن منصة فارمين' : 'About FARMINN'}
+          ${isRtl ? 'عن منصة فارم إن' : 'About FARMINN'}
         </h1>
         <p style="font-size: 1.15rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
           ${isRtl ? 'المنصة الرائدة في جمهورية مصر العربية المتخصصة حصرياً في الاستثمار العقاري الزراعي وإدارة وتشغيل المزارع وفق أعلى المعايير الهندسية والقانونية.' : "Egypt's premier marketplace dedicated exclusively to agricultural real estate, professional farm operations, and vetted agribusiness investments."}
@@ -1480,7 +1480,7 @@ export function renderAboutPage({ lang }) {
         ${isRtl ? 'رؤيتنا ورسالتنا' : 'Our Vision & Core Standards'}
       </h2>
       <p>
-        ${isRtl ? 'تأسست فارمين لمعالجة التحديات التاريخية في القطاع الزراعي: غياب المعاينة الدقيقة، تضارب أوراق الملكية، وصعوبة إيجاد كوادر إدارة وتشغيل موثوقة للأراضي المستصلحة. نجمع كافة أطراف المنظومة في بيئة رقمية محكمة تضمن أمان الاستثمار.' : 'FARMINN was established to resolve the historical hurdles in Egyptian agricultural investment: lack of agronomic validation, murky land tenure, and operational bottlenecks. We unite land owners, institutional investors, agronomists, and suppliers in a verified ecosystem.'}
+        ${isRtl ? 'تأسست فارم إن لمعالجة التحديات التاريخية في القطاع الزراعي: غياب المعاينة الدقيقة، تضارب أوراق الملكية، وصعوبة إيجاد كوادر إدارة وتشغيل موثوقة للأراضي المستصلحة. نجمع كافة أطراف المنظومة في بيئة رقمية محكمة تضمن أمان الاستثمار.' : 'FARMINN was established to resolve the historical hurdles in Egyptian agricultural investment: lack of agronomic validation, murky land tenure, and operational bottlenecks. We unite land owners, institutional investors, agronomists, and suppliers in a verified ecosystem.'}
       </p>
 
       <div class="card grid grid--cols-2" style="gap: var(--space-4); background: #ffffff; padding: var(--space-6); margin-block: var(--space-4);">
@@ -1598,10 +1598,10 @@ export function renderTermsPage({ lang }) {
 
       <div class="card stack" style="padding: var(--space-6); gap: var(--space-4); background: #ffffff; line-height: 1.7; color: var(--color-text-secondary);">
         <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-secondary); margin: 0;">
-          ${isRtl ? '1. شروط استخدام منصة فارمين' : '1. Terms of Service'}
+          ${isRtl ? '1. شروط استخدام منصة فارم إن' : '1. Terms of Service'}
         </h2>
         <p>
-          ${isRtl ? 'تعتبر منصة فارمين وسيطاً تقنياً موثقاً يربط بين المشترين والبائعين ومديري المزارع. تخضع جميع العروض المنشورة للمراجعة الإدارية ولا تعتبر المنصة طرفاً في العقود المباشرة ما لم يتم التعاقد عبر خدمة إدارة الصفقات المعتمدة.' : 'FARMINN provides a verified platform connecting buyers, sellers, farm managers, and vendors. All public listings undergo review, and direct transactions are governed by legal agreements executed between the respective parties.'}
+          ${isRtl ? 'تعتبر منصة فارم إن وسيطاً تقنياً موثقاً يربط بين المشترين والبائعين ومديري المزارع. تخضع جميع العروض المنشورة للمراجعة الإدارية ولا تعتبر المنصة طرفاً في العقود المباشرة ما لم يتم التعاقد عبر خدمة إدارة الصفقات المعتمدة.' : 'FARMINN provides a verified platform connecting buyers, sellers, farm managers, and vendors. All public listings undergo review, and direct transactions are governed by legal agreements executed between the respective parties.'}
         </p>
 
         <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-secondary); margin: 0;">
