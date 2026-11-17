@@ -586,6 +586,17 @@ export async function seedDatabase() {
     }
   }
 
+  // 12. Ensure dummy phone numbers and high-quality verified logos across both fresh and existing DBs
+  try {
+    await db.query(`UPDATE suppliers SET phone = '+2010000000', whatsapp = '+2010000000' WHERE phone != '+2010000000'`);
+    await db.query(`UPDATE human_resources SET phone = '+2010000000', whatsapp = '+2010000000' WHERE phone != '+2010000000'`);
+    await db.query(`UPDATE suppliers SET logo_url = 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600&q=80' WHERE slug = 'sunagro-solar-pumping'`);
+    await db.query(`UPDATE suppliers SET logo_url = 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=600&q=80' WHERE slug = 'delta-modern-irrigation'`);
+    await db.query(`UPDATE suppliers SET logo_url = 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80' WHERE slug = 'nile-agritech-seedlings'`);
+  } catch (syncErr) {
+    console.warn('[FARMINN Seed Sync Warning]', syncErr.message);
+  }
+
   console.log('[FARMINN Seed] Seed completed successfully.');
 }
 

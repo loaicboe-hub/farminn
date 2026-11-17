@@ -329,7 +329,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                     <td><strong>${escapeHtml(r.title_en)}</strong></td>
                     <td>${escapeHtml(r.gov_name_en)}</td>
                     <td>${r.area_feddan} Feddan</td>
-                    <td>${escapeHtml(r.contact_name)} (<bdi dir="ltr" class="phone-number">${r.contact_phone}</bdi>)</td>
+                    <td>${escapeHtml(r.contact_name)} (<span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(r.contact_phone)}</span>)</td>
                     <td><span class="badge badge--info">${r.proposals_count}</span></td>
                     <td><span class="badge badge--success">${r.status}</span></td>
                   </tr>
@@ -389,7 +389,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                 <tbody>
                   ${quickBuy.map(q => `
                     <tr>
-                      <td><strong>${escapeHtml(q.full_name)}</strong><br><bdi dir="ltr" class="phone-number">${escapeHtml(q.phone)}</bdi></td>
+                      <td><strong>${escapeHtml(q.full_name)}</strong><br><span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(q.phone)}</span></td>
                       <td>${formatNumber(q.available_cash)} EGP</td>
                       <td>${escapeHtml(q.exchange_asset_type)}</td>
                       <td><span class="badge badge--info">${q.status}</span></td>
@@ -414,7 +414,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                   ${quickSell.map(q => `
                     <tr>
                       <td><strong>${escapeHtml(q.farm_name)}</strong><br>${q.area_feddan} feddan</td>
-                      <td>${escapeHtml(q.full_name)}<br><bdi dir="ltr" class="phone-number">${escapeHtml(q.phone)}</bdi></td>
+                      <td>${escapeHtml(q.full_name)}<br><span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(q.phone)}</span></td>
                       <td>${formatNumber(q.asking_price)} EGP</td>
                       <td><span class="badge badge--warning">${q.status}</span></td>
                     </tr>

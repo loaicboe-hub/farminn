@@ -204,10 +204,16 @@ h4 { font-size: var(--text-xl); }
 }
 
 /* Force international phone numbers to render LTR in both RTL and LTR contexts */
-.phone-number, bdi[dir="ltr"] {
+.phone-number,
+bdi[dir="ltr"],
+span[dir="ltr"].phone-number,
+[dir="rtl"] .phone-number,
+[dir="rtl"] bdi[dir="ltr"],
+[dir="rtl"] span[dir="ltr"].phone-number {
   direction: ltr !important;
   unicode-bidi: isolate !important;
-  display: inline-block;
-  text-align: left;
+  display: inline-block !important;
+  text-align: left !important;
+  white-space: nowrap !important;
 }
 

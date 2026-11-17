@@ -674,7 +674,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
     <div class="mobile-drawer-footer">
       <a href="https://wa.me/${cleanWhatsapp}" target="_blank" rel="noopener" class="whatsapp-btn btn btn--sm" style="width: 100%; height: 42px; border-radius: 8px; font-size: 0.95rem;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/></svg>
-        ${isRtl ? 'واتساب المنصة' : 'WhatsApp Us'}: <bdi dir="ltr">${whatsapp}</bdi>
+        ${isRtl ? 'واتساب المنصة' : 'WhatsApp Us'}: <span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${whatsapp}</span>
       </a>
       ${user ? `
         <button type="button" class="btn btn--sm btn--ghost" id="drawer-logout-btn" style="width: 100%; color: #dc2626; border: 1px solid #fecaca; margin-top: 4px;">
@@ -702,7 +702,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
           <div class="cluster" style="gap: 10px; margin-top: 4px;">
             <a href="https://wa.me/${cleanWhatsapp}" target="_blank" rel="noopener" class="whatsapp-btn btn btn--sm" style="border-radius: 6px; padding: 6px 14px; display: inline-flex; align-items: center; gap: 8px;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/></svg>
-              <bdi dir="ltr" class="phone-number">${whatsapp}</bdi>
+              <span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${whatsapp}</span>
             </a>
           </div>
         </div>
@@ -747,7 +747,7 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
           </p>
           <p style="font-size: 0.88rem; color: #c0d8c0; line-height: 1.6; margin: 0;">
             <strong>${isRtl ? 'البريد:' : 'Email:'}</strong> ${escapeHtml(email)}<br>
-            <strong>${isRtl ? 'الهاتف:' : 'Phone:'}</strong> <bdi dir="ltr" class="phone-number">${escapeHtml(phone)}</bdi>
+            <strong>${isRtl ? 'الهاتف:' : 'Phone:'}</strong> <span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(phone)}</span>
           </p>
           <p style="font-size: 0.82rem; color: #8ba98b; margin: 0;">
             ${isRtl ? (settings.working_hours_ar || 'الأحد – الخميس 9:00 ص – 6:00 م') : (settings.working_hours_en || 'Sun – Thu 9:00 AM – 6:00 PM')}

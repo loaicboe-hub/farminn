@@ -775,8 +775,8 @@ export function renderManagementPage({ lang, requests = [], locations = [] }) {
     </div>
 
     <!-- Management Request Modal -->
-    <div id="mgmt-modal" class="modal" hidden>
-      <div class="modal__dialog" style="max-inline-size: 640px; background: #ffffff;">
+    <div id="mgmt-modal" class="modal" hidden style="position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto;">
+      <div class="modal__dialog" style="max-inline-size: 640px; width: 100%; background: #ffffff !important; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); padding: 24px; position: relative; z-index: 10000; margin: auto;">
         <div class="modal__header cluster" style="justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-3); margin-bottom: var(--space-4);">
           <div class="cluster" style="gap: 10px; align-items: center;">
             <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(30, 86, 49, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
@@ -861,8 +861,8 @@ export function renderManagementPage({ lang, requests = [], locations = [] }) {
     </div>
 
     <!-- Proposal Submission Modal -->
-    <div id="proposal-modal" class="modal" hidden>
-      <div class="modal__dialog" style="max-inline-size: 580px; background: #ffffff;">
+    <div id="proposal-modal" class="modal" hidden style="position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto;">
+      <div class="modal__dialog" style="max-inline-size: 580px; width: 100%; background: #ffffff !important; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); padding: 24px; position: relative; z-index: 10000; margin: auto;">
         <div class="modal__header cluster" style="justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-3); margin-bottom: var(--space-4);">
           <div class="cluster" style="gap: 10px; align-items: center;">
             <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(30, 86, 49, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
@@ -1070,7 +1070,7 @@ export function renderPartnershipsPage({ lang, partnerships = [], locations = []
 
             <div style="margin-top: auto; border-top: 1px solid var(--color-border); padding-top: var(--space-4); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
               <span style="font-size: 0.85rem; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 4px;">
-                ${isRtl ? 'المسؤول:' : 'Contact:'} ${escapeHtml(p.contact_name)} (<bdi dir="ltr" class="phone-number">${escapeHtml(p.contact_phone)}</bdi>)
+                ${isRtl ? 'المسؤول:' : 'Contact:'} ${escapeHtml(p.contact_name)} (<span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(p.contact_phone)}</span>)
               </span>
               <a href="https://wa.me/${p.contact_whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="whatsapp-btn btn btn--sm" style="border-radius: 6px;">
                 ${isRtl ? 'تواصل للشراكة' : 'Discuss Partnership'}
@@ -1299,13 +1299,17 @@ export function renderSuppliersPage({ lang, suppliers = [], categories = [] }) {
         ${suppliers.map(s => {
           const cleanPhone = (s.phone || '').replace(/[^0-9]/g, '');
           const cleanWhatsapp = (s.whatsapp || '').replace(/[^0-9]/g, '');
-          const fallbackImg = 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=600&q=80';
+          const fallbackImg = s.category_slug === 'solar-energy'
+            ? 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600&q=80'
+            : s.category_slug === 'fertilizers'
+            ? 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80'
+            : 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=600&q=80';
           return `
           <div class="card" style="display: flex; flex-direction: column; height: 100%; padding: 0; overflow: hidden; background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <!-- Supplier Cover Image with Verified Badge -->
-            <div style="position: relative; width: 100%; height: 160px; background: var(--color-surface-alt); overflow: hidden;">
+            <div style="position: relative; width: 100%; height: 175px; background: var(--color-surface-alt); overflow: hidden;">
               <img src="${escapeHtml(s.logo_url || fallbackImg)}" alt="${escapeHtml(isRtl ? s.company_name_ar : s.company_name_en)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null; this.src='${fallbackImg}';">
-              <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);"></div>
+              <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);"></div>
               <span class="badge badge--success" style="position: absolute; top: 12px; inset-inline-end: 12px; font-size: 0.75rem; padding: 4px 10px; background: #166534; color: #ffffff; font-weight: 700; border: none; box-shadow: 0 2px 4px rgba(0,0,0,0.25);">
                 ✔ ${isRtl ? 'مورد معتمد' : 'Verified Vendor'}
               </span>
@@ -1317,7 +1321,7 @@ export function renderSuppliersPage({ lang, suppliers = [], categories = [] }) {
                 ${escapeHtml(isRtl ? s.company_name_ar : s.company_name_en)}
               </h3>
 
-              <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0; flex: 1 1 auto; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+              <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0; min-height: 4.8em; flex: 1 1 auto; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
                 ${escapeHtml(isRtl ? s.description_ar : s.description_en)}
               </p>
 
@@ -1325,7 +1329,7 @@ export function renderSuppliersPage({ lang, suppliers = [], categories = [] }) {
               <div style="margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
                 <a href="tel:${cleanPhone}" style="text-decoration: none; font-size: 0.88rem; font-weight: 600; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 6px;">
                   <span style="font-size: 0.95rem;">📞</span>
-                  <bdi dir="ltr" class="phone-number">${escapeHtml(s.phone)}</bdi>
+                  <span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(s.phone)}</span>
                 </a>
                 <a href="https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(isRtl ? `مرحباً، أطلب عرض أسعار من ${s.company_name_ar}` : `Hello, inquiring about products from ${s.company_name_en}`)}" target="_blank" rel="noopener" class="whatsapp-btn btn btn--sm" style="border-radius: 6px; padding: 7px 16px; font-weight: 700;">
                   ${isRtl ? 'طلب تسعير' : 'Get Quote'}
@@ -1386,7 +1390,7 @@ export function renderHumanResourcesPage({ lang, specialists = [], categories = 
             <div style="margin-top: auto; border-top: 1px solid var(--color-border); padding-top: var(--space-3); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
               <a href="tel:${cleanPhone}" style="text-decoration: none; font-size: 0.85rem; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 4px;">
                 <span>📞</span>
-                <bdi dir="ltr" class="phone-number">${escapeHtml(sp.phone)}</bdi>
+                <span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(sp.phone)}</span>
               </a>
               <a href="https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(isRtl ? `مرحباً، أستفسر بخصوص التعاون مع ${sp.full_name_ar}` : `Inquiring regarding cooperation with ${sp.full_name_en}`)}" target="_blank" class="btn btn--sm btn--primary" style="border-radius: 6px;">
                 ${isRtl ? 'طلب توظيف' : 'Hire / Contact'}
@@ -1739,7 +1743,7 @@ export function renderContactPage({ lang, settings = {} }) {
           </div>
           <div>
             <strong>${isRtl ? 'الهاتف المباشر:' : 'Direct Phone:'}</strong><br>
-            <bdi dir="ltr" class="phone-number">${escapeHtml(phone)}</bdi>
+            <span dir="ltr" class="phone-number" style="direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;">&lrm;${escapeHtml(phone)}</span>
           </div>
         </div>
 
