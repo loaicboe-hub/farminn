@@ -79,6 +79,87 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
       </div>
     </section>
 
+    <!-- Featured Farms Section (Immediately After Hero Search Filter on Mobile & Desktop) -->
+    <section class="featured-farms-section" style="background: var(--color-surface-alt); padding-block: clamp(2rem, 4vw, 3.5rem); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="container stack" style="gap: var(--space-6);">
+        <div class="cluster" style="justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span style="color: var(--color-accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">
+              ${isRtl ? 'فرص مميزة وموثقة' : 'Verified Opportunities'}
+            </span>
+            <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-secondary); margin: 4px 0 0;">
+              ${isRtl ? 'أحدث المزارع المعروضة' : 'Featured Farm Listings'}
+            </h2>
+          </div>
+          <a href="/${lang}/farms" class="btn btn--outline btn--sm">
+            ${isRtl ? 'مشاهدة كافة المزارع' : 'View All Farms'} &rarr;
+          </a>
+        </div>
+
+        <div class="grid grid--cols-3" style="gap: var(--space-6);">
+          ${farms.slice(0, 6).map(f => {
+            const purposeClass = f.purpose === 'sale' ? 'purpose--sale' : f.purpose === 'rent' ? 'purpose--rent' : 'purpose--both';
+            const purposeLabel = f.purpose === 'sale' ? (isRtl ? 'للبيع' : 'For Sale') : f.purpose === 'rent' ? (isRtl ? 'للإيجار' : 'For Rent') : (isRtl ? 'بيع / إيجار' : 'Sale or Rent');
+            const title = isRtl ? (f.title_ar || f.title_en) : f.title_en;
+            const govName = isRtl ? (f.gov_name_ar || f.gov_name_en) : f.gov_name_en;
+            const img = f.cover_image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80';
+
+            return `
+              <article class="farm-card">
+                <div class="farm-card__image-wrap">
+                  <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" class="farm-card__image" loading="lazy">
+                  <span class="farm-card__badge-purpose ${purposeClass}">${purposeLabel}</span>
+                  ${f.is_featured ? `<span style="position: absolute; top: 12px; inset-inline-end: 12px; background: #d97706; color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 8px; border-radius: 4px;">★ ${isRtl ? 'مميزة' : 'Featured'}</span>` : ''}
+                </div>
+
+                <div class="stack" style="padding: var(--space-5); gap: var(--space-3); flex: 1; justify-content: space-between;">
+                  <div class="stack" style="gap: var(--space-2);">
+                    <div class="cluster" style="font-size: 0.85rem; color: var(--color-text-muted); gap: 6px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                      ${escapeHtml(govName)}
+                    </div>
+
+                    <h3 style="font-size: 1.15rem; font-weight: 700; line-height: 1.35; margin: 0;">
+                      <a href="/${lang}/farms/${escapeHtml(f.slug)}" style="color: var(--color-text); text-decoration: none;">
+                        ${escapeHtml(title)}
+                      </a>
+                    </h3>
+
+                    <!-- Specs row -->
+                    <div class="cluster" style="gap: 6px; margin-top: 4px;">
+                      <span class="spec-pill">
+                        <strong>${f.area_feddan}</strong> ${isRtl ? 'فدان' : 'Feddan'}
+                      </span>
+                      <span class="spec-pill">
+                        ${f.water_source === 'nile' ? (isRtl ? 'نيل بحاري' : 'Nile Water') : (isRtl ? 'بئر ارتوازي' : 'Well Water')}
+                      </span>
+                      <span class="spec-pill">
+                        ${f.electricity_source === 'solar' ? (isRtl ? 'طاقة شمسية' : 'Solar') : (isRtl ? 'كهرباء شبكة' : 'Grid Power')}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-3); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      <div style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600;">
+                        ${f.purpose === 'rent' ? (isRtl ? 'القيمة الإيجارية السنوية' : 'Annual Rent') : (isRtl ? 'السعر الإجمالي' : 'Total Price')}
+                      </div>
+                      <div style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary);">
+                        ${formatEgp(f.price)} <span style="font-size: 0.8rem; font-weight: 600;">${isRtl ? 'جنيه' : 'EGP'}</span>
+                      </div>
+                    </div>
+                    <a href="/${lang}/farms/${escapeHtml(f.slug)}" class="btn btn--sm btn--outline">
+                      ${isRtl ? 'التفاصيل' : 'Details'} &rarr;
+                    </a>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    </section>
+
     <!-- Stats Ribbon -->
     <section style="background: #ffffff; border-bottom: 1px solid var(--color-border); padding-block: var(--space-6);">
       <div class="container grid grid--cols-4" style="text-align: center; gap: var(--space-4);">
@@ -192,87 +273,6 @@ export function renderHomePage({ lang, farms = [], locations = [], categories = 
             <strong style="color: var(--color-secondary); display: block; margin-bottom: 4px;">${isRtl ? 'الكوادر الزراعية' : 'Human Resources'}</strong>
             <span style="font-size: 0.85rem; color: var(--color-text-muted);">${isRtl ? 'مهندسون، مديرو مزارع، وبيطريون' : 'Agronomists, managers & specialists'}</span>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Farms Section -->
-    <section style="background: var(--color-surface-alt); padding-block: var(--space-12); border-top: 1px solid var(--color-border);">
-      <div class="container stack" style="gap: var(--space-8);">
-        <div class="cluster" style="justify-content: space-between; align-items: flex-end;">
-          <div>
-            <span style="color: var(--color-accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">
-              ${isRtl ? 'فرص مميزة وموثقة' : 'Verified Opportunities'}
-            </span>
-            <h2 style="font-size: 2rem; font-weight: 800; color: var(--color-secondary); margin: 4px 0 0;">
-              ${isRtl ? 'أحدث المزارع المعروضة' : 'Featured Farm Listings'}
-            </h2>
-          </div>
-          <a href="/${lang}/farms" class="btn btn--outline btn--sm">
-            ${isRtl ? 'مشاهدة كافة المزارع' : 'View All Farms'} &rarr;
-          </a>
-        </div>
-
-        <div class="grid grid--cols-3" style="gap: var(--space-6);">
-          ${farms.slice(0, 6).map(f => {
-            const purposeClass = f.purpose === 'sale' ? 'purpose--sale' : f.purpose === 'rent' ? 'purpose--rent' : 'purpose--both';
-            const purposeLabel = f.purpose === 'sale' ? (isRtl ? 'للبيع' : 'For Sale') : f.purpose === 'rent' ? (isRtl ? 'للإيجار' : 'For Rent') : (isRtl ? 'بيع / إيجار' : 'Sale or Rent');
-            const title = isRtl ? (f.title_ar || f.title_en) : f.title_en;
-            const govName = isRtl ? (f.gov_name_ar || f.gov_name_en) : f.gov_name_en;
-            const img = f.cover_image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80';
-
-            return `
-              <article class="farm-card">
-                <div class="farm-card__image-wrap">
-                  <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" class="farm-card__image" loading="lazy">
-                  <span class="farm-card__badge-purpose ${purposeClass}">${purposeLabel}</span>
-                  ${f.is_featured ? `<span style="position: absolute; top: 12px; inset-inline-end: 12px; background: #d97706; color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 8px; border-radius: 4px;">★ ${isRtl ? 'مميزة' : 'Featured'}</span>` : ''}
-                </div>
-
-                <div class="stack" style="padding: var(--space-5); gap: var(--space-3); flex: 1; justify-content: space-between;">
-                  <div class="stack" style="gap: var(--space-2);">
-                    <div class="cluster" style="font-size: 0.85rem; color: var(--color-text-muted); gap: 6px;">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                      ${escapeHtml(govName)}
-                    </div>
-
-                    <h3 style="font-size: 1.15rem; font-weight: 700; line-height: 1.35; margin: 0;">
-                      <a href="/${lang}/farms/${escapeHtml(f.slug)}" style="color: var(--color-text); text-decoration: none;">
-                        ${escapeHtml(title)}
-                      </a>
-                    </h3>
-
-                    <!-- Specs row -->
-                    <div class="cluster" style="gap: 6px; margin-top: 4px;">
-                      <span class="spec-pill">
-                        <strong>${f.area_feddan}</strong> ${isRtl ? 'فدان' : 'Feddan'}
-                      </span>
-                      <span class="spec-pill">
-                        ${f.water_source === 'nile' ? (isRtl ? 'نيل بحاري' : 'Nile Water') : (isRtl ? 'بئر ارتوازي' : 'Well Water')}
-                      </span>
-                      <span class="spec-pill">
-                        ${f.electricity_source === 'solar' ? (isRtl ? 'طاقة شمسية' : 'Solar') : (isRtl ? 'كهرباء شبكة' : 'Grid Power')}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-3); display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                      <div style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600;">
-                        ${f.purpose === 'rent' ? (isRtl ? 'القيمة الإيجارية السنوية' : 'Annual Rent') : (isRtl ? 'السعر الإجمالي' : 'Total Price')}
-                      </div>
-                      <div style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary);">
-                        ${formatEgp(f.price)} <span style="font-size: 0.8rem; font-weight: 600;">${isRtl ? 'جنيه' : 'EGP'}</span>
-                      </div>
-                    </div>
-                    <a href="/${lang}/farms/${escapeHtml(f.slug)}" class="btn btn--sm btn--outline">
-                      ${isRtl ? 'التفاصيل' : 'Details'} &rarr;
-                    </a>
-                  </div>
-                </div>
-              </article>
-            `;
-          }).join('')}
         </div>
       </div>
     </section>

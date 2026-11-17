@@ -18,36 +18,36 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
   const address = isRtl ? (settings.address_ar || 'طريق مصر إسكندرية الصحراوي، مصر') : (settings.address_en || 'Cairo-Alexandria Desert Road, Egypt');
 
   const navItems = [
-    { key: 'farms', href: `/${lang}/farms`, label: isRtl ? 'المزارع' : 'Farms' },
-    { key: 'management', href: `/${lang}/management`, label: isRtl ? 'إدارة المزارع' : 'Management' },
-    { key: 'partnerships', href: `/${lang}/partnerships`, label: isRtl ? 'الشراكات والاستثمار' : 'Partnerships' },
-    { key: 'quick-buy', href: `/${lang}/quick-buy`, label: isRtl ? 'شراء سريع' : 'Quick Buy' },
-    { key: 'quick-sell', href: `/${lang}/quick-sell`, label: isRtl ? 'بيع سريع' : 'Quick Sell' },
-    { key: 'suppliers', href: `/${lang}/suppliers`, label: isRtl ? 'الموردين' : 'Suppliers' },
-    { key: 'human-resources', href: `/${lang}/human-resources`, label: isRtl ? 'الكوادر الزراعية' : 'Human Resources' }
+    { key: 'farms', href: `/${lang}/farms`, label: isRtl ? 'المزارع' : 'Farms', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>' },
+    { key: 'management', href: `/${lang}/management`, label: isRtl ? 'إدارة المزارع' : 'Farm Management', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>' },
+    { key: 'partnerships', href: `/${lang}/partnerships`, label: isRtl ? 'الشراكات والاستثمار' : 'Joint Ventures & Capital', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>' },
+    { key: 'quick-buy', href: `/${lang}/quick-buy`, label: isRtl ? 'شراء سريع' : 'Quick Buy', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>' },
+    { key: 'quick-sell', href: `/${lang}/quick-sell`, label: isRtl ? 'بيع سريع' : 'Quick Sell', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>' },
+    { key: 'suppliers', href: `/${lang}/suppliers`, label: isRtl ? 'الموردين' : 'Suppliers', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>' },
+    { key: 'human-resources', href: `/${lang}/human-resources`, label: isRtl ? 'الكوادر الزراعية' : 'Human Resources', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>' }
   ];
 
   const userActionHtml = user
     ? `
-      <div class="user-menu-pill">
-        <a href="/${lang}/my" class="btn btn--sm btn--primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-          ${isRtl ? 'حسابي' : 'My Account'}
+      <div class="user-menu-pill" style="display: flex; align-items: center; gap: 4px;">
+        <a href="/${lang}/my" class="btn btn--sm btn--primary header-btn" title="${isRtl ? 'حسابي' : 'My Account'}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span class="user-btn-label">${isRtl ? 'حسابي' : 'Account'}</span>
         </a>
         ${['super_admin', 'admin', 'editor'].includes(user.role_slug) ? `
-          <a href="/admin" class="btn btn--sm btn--secondary" style="margin-inline-start: 6px;">
-            ${isRtl ? 'لوحة الإدارة' : 'Admin'}
+          <a href="/admin" class="btn btn--sm btn--secondary header-btn desktop-only" style="margin-inline-start: 4px;">
+            ${isRtl ? 'الإدارة' : 'Admin'}
           </a>
         ` : ''}
-        <button type="button" class="btn btn--sm btn--ghost" id="logout-btn" style="margin-inline-start: 6px;" title="${isRtl ? 'تسجيل الخروج' : 'Sign Out'}">
+        <button type="button" class="btn btn--sm btn--ghost header-btn desktop-only" id="logout-btn" style="margin-inline-start: 4px;" title="${isRtl ? 'تسجيل الخروج' : 'Sign Out'}">
           ${isRtl ? 'خروج' : 'Logout'}
         </button>
       </div>
     `
     : `
-      <a href="/${lang}/sign-in" class="btn btn--sm btn--primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-        ${isRtl ? 'تسجيل الدخول' : 'Sign In'}
+      <a href="/${lang}/sign-in" class="btn btn--sm btn--primary header-btn" title="${isRtl ? 'تسجيل الدخول' : 'Sign In'}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        <span class="user-btn-label">${isRtl ? 'دخول' : 'Sign In'}</span>
       </a>
     `;
 
@@ -70,18 +70,65 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* FARMINN Agricultural Polish */
+    /* FARMINN Agricultural Polish & Header System */
     :root {
       --header-height: 72px;
     }
     .farminn-header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.96);
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--color-border);
-      block-size: var(--header-height);
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+    .farminn-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      flex-wrap: nowrap;
+      gap: 12px;
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+    .brand-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--color-secondary);
+      letter-spacing: -0.02em;
+      display: block;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      display: block;
+      margin-top: 2px;
+      white-space: nowrap;
     }
     .farminn-nav-list {
       display: flex;
@@ -108,6 +155,24 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
     .farminn-nav-link[aria-current="page"] {
       border-bottom: 2px solid var(--color-primary);
     }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      flex-wrap: nowrap;
+    }
+    .header-btn {
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding-inline: 12px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      white-space: nowrap;
+      text-decoration: none;
+    }
     .lang-switcher-btn {
       display: inline-flex;
       align-items: center;
@@ -121,11 +186,174 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
       padding: 6px 14px;
       text-decoration: none;
       transition: all 0.15s ease;
+      white-space: nowrap;
+      height: 38px;
     }
     .lang-switcher-btn:hover {
       background: var(--color-primary-soft);
       border-color: var(--color-primary);
       text-decoration: none;
+    }
+    .mobile-menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--color-surface-alt);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-secondary);
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .mobile-menu-toggle:hover {
+      background: var(--color-primary-soft);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* Mobile Drawer Styles */
+    .mobile-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 1050;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .mobile-drawer-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      inset-inline-start: 0;
+      width: min(340px, 86vw);
+      background: #ffffff;
+      z-index: 1060;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    [dir="rtl"] .mobile-drawer {
+      transform: translateX(100%);
+    }
+    .mobile-drawer.is-open {
+      transform: translateX(0) !important;
+    }
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface-alt);
+    }
+    .mobile-drawer-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0;
+    }
+    .mobile-drawer-nav {
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+    .mobile-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .mobile-nav-item:hover,
+    .mobile-nav-item[aria-current="page"] {
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .mobile-nav-item svg {
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .mobile-drawer-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-surface-alt);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 900px) {
+      .farminn-nav-list { display: none !important; }
+      .mobile-menu-toggle { display: inline-flex !important; }
+      .desktop-only { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      :root {
+        --header-height: 62px;
+      }
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+      }
+      .brand-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .brand-title {
+        font-size: 1.15rem;
+      }
+      .brand-sub {
+        display: none;
+      }
+      .header-actions {
+        gap: 6px;
+      }
+      .header-btn {
+        height: 34px;
+        padding-inline: 10px;
+        font-size: 0.8rem;
+      }
+      .lang-switcher-btn {
+        height: 34px;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+      }
+      .mobile-menu-toggle {
+        width: 36px;
+        height: 36px;
+      }
     }
     .farminn-footer {
       background: #132a13;
@@ -333,54 +561,120 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
       color: #ffffff;
       text-decoration: none;
     }
-    @media (max-width: 900px) {
-      .farminn-nav-list { display: none; }
-    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="farminn-header">
-    <div class="container cluster" style="justify-content: space-between; height: 100%;">
-      <!-- Brand Logo -->
-      <a href="/${lang}" class="cluster" style="text-decoration: none; gap: 10px;">
-        <span style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--color-primary); color: #fff; border-radius: 12px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
-          </svg>
-        </span>
-        <div>
-          <span style="font-size: 1.45rem; font-weight: 800; color: var(--color-secondary); letter-spacing: -0.02em; display: block; line-height: 1;">
-            ${escapeHtml(brandName)}
+    <div class="container" style="height: 100%;">
+      <div class="farminn-header-inner">
+        <!-- Brand Logo -->
+        <a href="/${lang}" class="brand-link" title="${escapeHtml(brandName)}">
+          <span class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+            </svg>
           </span>
-          <span style="font-size: 0.72rem; color: var(--color-text-muted); font-weight: 600; display: block; margin-top: 2px;">
-            ${isRtl ? 'سوق وإدارة المزارع' : 'Farms Marketplace & Management'}
-          </span>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav aria-label="Main Navigation">
-        <ul class="farminn-nav-list">
-          ${navItems.map(item => `
-            <li>
-              <a href="${item.href}" class="farminn-nav-link" ${activeNav === item.key ? 'aria-current="page"' : ''}>
-                ${escapeHtml(item.label)}
-              </a>
-            </li>
-          `).join('')}
-        </ul>
-      </nav>
-
-      <!-- Right Controls: Language & Account -->
-      <div class="cluster" style="gap: 12px;">
-        <a href="/${otherLang}" class="lang-switcher-btn" id="lang-switch-btn" data-target-lang="${otherLang}">
-          ${otherLangLabel}
+          <div>
+            <span class="brand-title">${escapeHtml(brandName)}</span>
+            <span class="brand-sub">${isRtl ? 'سوق وإدارة المزارع' : 'Farms Marketplace & Management'}</span>
+          </div>
         </a>
-        ${userActionHtml}
+
+        <!-- Desktop Navigation -->
+        <nav aria-label="Main Navigation">
+          <ul class="farminn-nav-list">
+            ${navItems.map(item => `
+              <li>
+                <a href="${item.href}" class="farminn-nav-link" ${activeNav === item.key ? 'aria-current="page"' : ''}>
+                  ${escapeHtml(item.label)}
+                </a>
+              </li>
+            `).join('')}
+          </ul>
+        </nav>
+
+        <!-- Right Controls: Language, Account, and Mobile Menu Toggle -->
+        <div class="header-actions">
+          <a href="/${otherLang}" class="lang-switcher-btn" data-target-lang="${otherLang}" title="${isRtl ? 'Switch to English' : 'التحويل للعربية'}">
+            ${otherLangLabel}
+          </a>
+          ${userActionHtml}
+          <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="${isRtl ? 'فتح القائمة' : 'Open Navigation Menu'}" aria-expanded="false" aria-controls="mobile-nav-drawer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer Overlay -->
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+  <aside class="mobile-drawer" id="mobile-nav-drawer" aria-hidden="true" role="dialog" aria-label="${isRtl ? 'قائمة المنصة' : 'Navigation Menu'}">
+    <!-- Drawer Header -->
+    <div class="mobile-drawer-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: var(--color-primary); color: #fff; border-radius: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+          </svg>
+        </span>
+        <strong style="font-size: 1.2rem; color: var(--color-secondary); font-weight: 800;">
+          ${escapeHtml(brandName)}
+        </strong>
+      </div>
+      <button type="button" class="mobile-drawer-close" id="mobile-drawer-close" aria-label="${isRtl ? 'إغلاق القائمة' : 'Close Menu'}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Quick User & Language Bar inside Drawer -->
+    <div style="padding: 12px 16px; background: #ffffff; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+      <a href="/${otherLang}" class="lang-switcher-btn" data-target-lang="${otherLang}" style="flex: 1; justify-content: center; height: 38px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        ${otherLangLabel}
+      </a>
+      ${user ? `
+        <a href="/${lang}/my" class="btn btn--sm btn--primary header-btn" style="flex: 1; justify-content: center; height: 38px;">
+          ${isRtl ? 'حسابي' : 'Account'}
+        </a>
+      ` : `
+        <a href="/${lang}/sign-in" class="btn btn--sm btn--primary header-btn" style="flex: 1; justify-content: center; height: 38px;">
+          ${isRtl ? 'تسجيل الدخول' : 'Sign In'}
+        </a>
+      `}
+    </div>
+
+    <!-- Navigation Items -->
+    <nav class="mobile-drawer-nav">
+      ${navItems.map(item => `
+        <a href="${item.href}" class="mobile-nav-item" ${activeNav === item.key ? 'aria-current="page"' : ''}>
+          ${item.icon || ''}
+          <span>${escapeHtml(item.label)}</span>
+        </a>
+      `).join('')}
+    </nav>
+
+    <!-- Drawer Footer -->
+    <div class="mobile-drawer-footer">
+      <a href="https://wa.me/${cleanWhatsapp}" target="_blank" rel="noopener" class="whatsapp-btn btn btn--sm" style="width: 100%; height: 42px; border-radius: 8px; font-size: 0.95rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/></svg>
+        ${isRtl ? 'واتساب المنصة' : 'WhatsApp Us'}: <bdi dir="ltr">${whatsapp}</bdi>
+      </a>
+      ${user ? `
+        <button type="button" class="btn btn--sm btn--ghost" id="drawer-logout-btn" style="width: 100%; color: #dc2626; border: 1px solid #fecaca; margin-top: 4px;">
+          ${isRtl ? 'تسجيل الخروج' : 'Log Out'}
+        </button>
+      ` : ''}
+    </div>
+  </aside>
 
   <!-- Main Content -->
   <main id="main-content">
@@ -460,31 +754,83 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
     </div>
   </footer>
 
-  <!-- Script for Language Switch & Logout -->
+  <!-- Script for Language Switch, Logout, and Mobile Menu Drawer -->
   <script>
-    // Language Switcher preserving path
-    document.getElementById('lang-switch-btn')?.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetLang = this.getAttribute('data-target-lang');
-      const currentPath = window.location.pathname;
-      let newPath = '/' + targetLang;
-      if (currentPath.startsWith('/en')) {
-        newPath = currentPath.replace(/^\/en/, '/' + targetLang);
-      } else if (currentPath.startsWith('/ar')) {
-        newPath = currentPath.replace(/^\/ar/, '/' + targetLang);
-      }
-      document.cookie = 'site_lang=' + targetLang + '; path=/; max-age=31536000';
-      window.location.href = newPath + window.location.search;
+    // Language Switcher preserving path across all buttons (header + drawer)
+    document.querySelectorAll('.lang-switcher-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetLang = this.getAttribute('data-target-lang');
+        const currentPath = window.location.pathname;
+        let newPath = '/' + targetLang;
+        if (currentPath.startsWith('/en')) {
+          newPath = currentPath.replace(/^\/en/, '/' + targetLang);
+        } else if (currentPath.startsWith('/ar')) {
+          newPath = currentPath.replace(/^\/ar/, '/' + targetLang);
+        }
+        document.cookie = 'site_lang=' + targetLang + '; path=/; max-age=31536000';
+        window.location.href = newPath + window.location.search;
+      });
     });
 
-    // Logout Button
-    document.getElementById('logout-btn')?.addEventListener('click', async function() {
-      try {
-        await fetch('/api/auth/logout', { method: 'POST' });
-        window.location.href = '/${lang}';
-      } catch (e) {
-        window.location.reload();
+    // Mobile Drawer Open / Close Logic
+    (function initMobileDrawer() {
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+      const drawerClose = document.getElementById('mobile-drawer-close');
+
+      function openDrawer() {
+        drawer?.classList.add('is-open');
+        backdrop?.classList.add('is-open');
+        menuToggle?.setAttribute('aria-expanded', 'true');
+        drawer?.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       }
+
+      function closeDrawer() {
+        drawer?.classList.remove('is-open');
+        backdrop?.classList.remove('is-open');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        drawer?.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      menuToggle?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = drawer?.classList.contains('is-open');
+        if (isOpen) closeDrawer();
+        else openDrawer();
+      });
+
+      drawerClose?.addEventListener('click', closeDrawer);
+      backdrop?.addEventListener('click', closeDrawer);
+
+      // Close on ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && drawer?.classList.contains('is-open')) {
+          closeDrawer();
+        }
+      });
+
+      // Close drawer when clicking any link inside it
+      drawer?.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          closeDrawer();
+        });
+      });
+    })();
+
+    // Logout Buttons (header and drawer)
+    ['logout-btn', 'drawer-logout-btn'].forEach(function(id) {
+      document.getElementById(id)?.addEventListener('click', async function() {
+        try {
+          await fetch('/api/auth/logout', { method: 'POST' });
+          window.location.href = '/${lang}';
+        } catch (e) {
+          window.location.reload();
+        }
+      });
     });
   </script>
 </body>
