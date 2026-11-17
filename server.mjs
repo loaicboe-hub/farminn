@@ -55,7 +55,7 @@ async function getSettingsMap() {
   return map;
 }
 
-const server = http.createServer(async (req, res) => {
+export async function app(req, res) {
   setSecurityHeaders(res);
 
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
@@ -479,24 +479,37 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'Internal Server Error', message: err.message }));
   }
-});
+}
+
+export const server = http.createServer(app);
 
 // Startup function
-async function startServer() {
+export async function startServer() {
   await runMigrations();
 
-  server.listen(config.port, '0.0.0.0', () => {
-    console.log(`\n======================================================`);
-    console.log(`🌾 FARMINN Platform running at: http://localhost:${config.port}`);
-    console.log(`   Arabic interface:   http://localhost:${config.port}/ar`);
-    console.log(`   English interface:  http://localhost:${config.port}/en`);
-    console.log(`   Admin Dashboard:    http://localhost:${config.port}/admin`);
-    console.log(`   Database Driver:    ${db.driver.toUpperCase()}`);
-    console.log(`======================================================\n`);
+  return new Promise((resolve) => {
+    server.listen(config.port, '0.0.0.0', () => {
+      console.log(`\n======================================================`);
+      console.log(`🌾 FARMINN Platform running at: http://localhost:${config.port}`);
+      console.log(`   Arabic interface:   http://localhost:${config.port}/ar`);
+      console.log(`   English interface:  http://localhost:${config.port}/en`);
+      console.log(`   Admin Dashboard:    http://localhost:${config.port}/admin`);
+      console.log(`   Database Driver:    ${db.driver ? db.driver.toUpperCase() : 'UNKNOWN'}`);
+      console.log(`======================================================\n`);
+      resolve(server);
+    });
   });
 }
 
-startServer().catch(err => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
-});
+// Only start listening when not in a serverless function environment AND executed directly as main script
+const isMainScript = Boolean(process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url));
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+
+if (isMainScript && !isServerless) {
+  startServer().catch(err => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });
+}
+
+export default app;

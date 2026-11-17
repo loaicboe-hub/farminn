@@ -58,13 +58,13 @@ export const config = {
   // Database configuration
   db: {
     driver: process.env.DB_DRIVER || 'postgresql',
-    url: process.env.DATABASE_URL || '',
+    url: process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.POSTGRES_PRISMA_URL || '',
     host: process.env.DB_HOST || '127.0.0.1',
     port: parseInt(process.env.DB_PORT || '5432', 10),
     name: process.env.DB_NAME || 'farminn_db',
     user: process.env.DB_USER || 'farminn_user',
     password: process.env.DB_PASSWORD || '',
-    ssl: process.env.DB_SSL === 'true'
+    ssl: process.env.DB_SSL === 'true' || Boolean(process.env.POSTGRES_URL || process.env.DATABASE_URL)
   },
   
   // Auth & Security

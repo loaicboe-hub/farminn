@@ -1,10 +1,11 @@
 import pg from 'pg';
 import fs from 'node:fs';
 import path from 'node:path';
-import { DatabaseSync } from 'node:sqlite';
+import os from 'node:os';
 import { config } from '../config.mjs';
 
 const { Pool } = pg;
+let DatabaseSync = null;
 
 class DatabaseAdapter {
   constructor() {
@@ -21,7 +22,11 @@ class DatabaseAdapter {
     if (config.db.driver === 'postgresql' && (config.db.url || config.db.host)) {
       try {
         const poolConfig = config.db.url
-          ? { connectionString: config.db.url, connectionTimeoutMillis: 2000 }
+          ? {
+              connectionString: config.db.url,
+              connectionTimeoutMillis: 3000,
+              ssl: config.db.ssl ? { rejectUnauthorized: false } : false
+            }
           : {
               host: config.db.host,
               port: config.db.port,
@@ -29,7 +34,7 @@ class DatabaseAdapter {
               user: config.db.user,
               password: config.db.password,
               ssl: config.db.ssl ? { rejectUnauthorized: false } : false,
-              connectionTimeoutMillis: 2000
+              connectionTimeoutMillis: 3000
             };
 
         const testPool = new Pool(poolConfig);
@@ -43,21 +48,44 @@ class DatabaseAdapter {
         console.log('[FARMINN DB] Connected to PostgreSQL successfully (VPS / Production engine).');
         return;
       } catch (err) {
-        console.warn(`[FARMINN DB] PostgreSQL connection unavailable locally (${err.message}). Activating local zero-dependency SQLite fallback for development.`);
+        console.warn(`[FARMINN DB] PostgreSQL connection unavailable (${err.message}). Activating local SQLite fallback for development/preview.`);
       }
     }
 
-    // Fallback to local SQLite for development
-    const dataDir = path.join(config.rootDir, 'storage/data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
+    // Fallback to local SQLite for development / serverless preview
+    try {
+      if (!DatabaseSync) {
+        const sqliteModule = await import('node:sqlite');
+        DatabaseSync = sqliteModule.DatabaseSync;
+      }
+
+      const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+      let dataDir;
+      if (isServerless) {
+        dataDir = path.join(os.tmpdir(), 'farminn_data');
+      } else {
+        dataDir = path.join(config.rootDir, 'storage/data');
+      }
+
+      if (!fs.existsSync(dataDir)) {
+        try {
+          fs.mkdirSync(dataDir, { recursive: true });
+        } catch (mErr) {
+          console.warn('[FARMINN DB] Directory creation failed, using os.tmpdir() directly:', mErr.message);
+          dataDir = os.tmpdir();
+        }
+      }
+
+      const dbPath = path.join(dataDir, 'farminn_dev.sqlite');
+      this.sqliteDb = new DatabaseSync(dbPath);
+      this.sqliteDb.exec('PRAGMA foreign_keys = ON;');
+      this.driver = 'sqlite';
+      this.isInitialized = true;
+      console.log(`[FARMINN DB] Initialized SQLite database at ${dbPath}`);
+    } catch (err) {
+      console.error('[FARMINN DB] Failed to initialize database adapter:', err.message);
+      throw err;
     }
-    const dbPath = path.join(dataDir, 'farminn_dev.sqlite');
-    this.sqliteDb = new DatabaseSync(dbPath);
-    this.sqliteDb.exec('PRAGMA foreign_keys = ON;');
-    this.driver = 'sqlite';
-    this.isInitialized = true;
-    console.log(`[FARMINN DB] Initialized local SQLite development database at ${dbPath}`);
   }
 
   async query(text, params = []) {

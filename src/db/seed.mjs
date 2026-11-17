@@ -39,7 +39,7 @@ export async function seedDatabase() {
     const adminPassHash = hashPassword('FarminnAdmin2026!');
     const insertAdmin = await db.query(
       `INSERT INTO users (full_name, email, mobile_number, password_hash, role_id, account_type, preferred_language, is_active, email_verified_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, 1, datetime('now'))`,
+       VALUES ($1, $2, $3, $4, $5, $6, $7, 1, NOW())`,
       ['FARMINN Administrator', adminEmail, '+201002345678', adminPassHash, superAdminRole.id, 'super_admin', 'en']
     );
     adminUserId = insertAdmin.lastInsertRowid || 1;
@@ -56,7 +56,7 @@ export async function seedDatabase() {
     const userPass = hashPassword('FarminnUser2026!');
     const ins = await db.query(
       `INSERT INTO users (full_name, email, mobile_number, password_hash, role_id, account_type, preferred_language, is_active, email_verified_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, 1, datetime('now'))`,
+       VALUES ($1, $2, $3, $4, $5, $6, $7, 1, NOW())`,
       ['Hajj Mansour El-Gebali', ownerEmail, '+201115554321', userPass, ownerRole?.id || 1, 'farm_owner', 'ar']
     );
     ownerUserId = ins.lastInsertRowid || 2;
