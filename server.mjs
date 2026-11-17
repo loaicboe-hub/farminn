@@ -55,22 +55,59 @@ async function getSettingsMap() {
   return map;
 }
 
+let isDbReady = false;
+let dbInitPromise = null;
+
+export async function ensureDatabaseReady() {
+  if (isDbReady) return;
+  if (!dbInitPromise) {
+    dbInitPromise = (async () => {
+      try {
+        await runMigrations();
+        isDbReady = true;
+      } catch (err) {
+        console.error('[FARMINN DB Init Error]', err);
+        isDbReady = true;
+      }
+    })();
+  }
+  await dbInitPromise;
+}
+
 export async function app(req, res) {
   setSecurityHeaders(res);
+
+  // 0. Ensure Database is ready for Serverless invocations
+  await ensureDatabaseReady();
+
+  // 1. Resolve original URL when running under Vercel rewrite or proxy
+  const parsedIncoming = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  const paramUrl = parsedIncoming.searchParams.get('__url');
+
+  let effectivePath = req.url;
+  if (paramUrl && !paramUrl.includes(':path*') && !paramUrl.includes('$1')) {
+    effectivePath = paramUrl.startsWith('/') ? paramUrl : ('/' + paramUrl);
+  } else {
+    const rawPath = parsedIncoming.pathname;
+    if (rawPath === '/api' || rawPath === '/api/index.js' || rawPath === '/server.mjs') {
+      const headerPath = req.headers['x-matched-path'] || req.headers['x-forwarded-uri'] || req.headers['x-now-route-matches'];
+      if (headerPath && headerPath !== '/api' && headerPath !== '/api/index.js' && !headerPath.includes(':')) {
+        effectivePath = headerPath.startsWith('/') ? headerPath : ('/' + headerPath);
+      } else {
+        effectivePath = '/';
+      }
+    }
+  }
+
+  // Clean __url from query string so it doesn't pollute queryParams
+  const cleanSearch = new URLSearchParams(parsedIncoming.searchParams);
+  cleanSearch.delete('__url');
+  const remainingQuery = cleanSearch.toString();
+  req.url = effectivePath + (remainingQuery ? (effectivePath.includes('?') ? '&' : '?') + remainingQuery : '');
 
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const pathname = parsedUrl.pathname;
   const queryParams = parsedUrl.searchParams;
-
-  res.setHeader('x-from-server-mjs', 'true');
-  res.setHeader('x-actual-pathname', pathname);
-  res.setHeader('x-actual-url', req.url);
-  res.setHeader('x-headers-keys', Object.keys(req.headers).join(','));
-  for (const k of Object.keys(req.headers)) {
-    try {
-      res.setHeader('x-hdr-' + k.replace(/[^a-zA-Z0-9-]/g, '_'), String(req.headers[k]).substring(0, 80));
-    } catch (e) {}
-  }
 
   // 1. Static Asset Serving
   if (

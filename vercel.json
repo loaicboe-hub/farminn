@@ -3,13 +3,15 @@
   "functions": {
     "api/index.js": {
       "includeFiles": "foundation/**"
+    },
+    "server.mjs": {
+      "includeFiles": "foundation/**"
     }
   },
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/api/index.js"
+      "source": "/:path*",
+      "destination": "/api?__url=/:path*"
     }
   ]
 }
-
