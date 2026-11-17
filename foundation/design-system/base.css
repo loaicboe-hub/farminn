@@ -203,3 +203,11 @@ h4 { font-size: var(--text-xl); }
   transform: scaleX(-1);
 }
 
+/* Force international phone numbers to render LTR in both RTL and LTR contexts */
+.phone-number, bdi[dir="ltr"] {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  display: inline-block;
+  text-align: left;
+}
+

@@ -329,7 +329,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                     <td><strong>${escapeHtml(r.title_en)}</strong></td>
                     <td>${escapeHtml(r.gov_name_en)}</td>
                     <td>${r.area_feddan} Feddan</td>
-                    <td>${escapeHtml(r.contact_name)} (${r.contact_phone})</td>
+                    <td>${escapeHtml(r.contact_name)} (<bdi dir="ltr" class="phone-number">${r.contact_phone}</bdi>)</td>
                     <td><span class="badge badge--info">${r.proposals_count}</span></td>
                     <td><span class="badge badge--success">${r.status}</span></td>
                   </tr>
@@ -389,7 +389,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                 <tbody>
                   ${quickBuy.map(q => `
                     <tr>
-                      <td><strong>${escapeHtml(q.full_name)}</strong><br>${escapeHtml(q.phone)}</td>
+                      <td><strong>${escapeHtml(q.full_name)}</strong><br><bdi dir="ltr" class="phone-number">${escapeHtml(q.phone)}</bdi></td>
                       <td>${formatNumber(q.available_cash)} EGP</td>
                       <td>${escapeHtml(q.exchange_asset_type)}</td>
                       <td><span class="badge badge--info">${q.status}</span></td>
@@ -414,7 +414,7 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
                   ${quickSell.map(q => `
                     <tr>
                       <td><strong>${escapeHtml(q.farm_name)}</strong><br>${q.area_feddan} feddan</td>
-                      <td>${escapeHtml(q.full_name)}<br>${escapeHtml(q.phone)}</td>
+                      <td>${escapeHtml(q.full_name)}<br><bdi dir="ltr" class="phone-number">${escapeHtml(q.phone)}</bdi></td>
                       <td>${formatNumber(q.asking_price)} EGP</td>
                       <td><span class="badge badge--warning">${q.status}</span></td>
                     </tr>
@@ -496,11 +496,11 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
               <div class="grid grid--cols-2" style="gap: var(--space-4);">
                 <div class="form-group" style="margin: 0;">
                   <label class="form-label">${isRtl ? 'رقم الواتساب الرسمي' : 'Official WhatsApp Number'}</label>
-                  <input type="text" name="whatsapp_number" value="${escapeHtml(settingsMap.whatsapp_number || '+201004491026')}" class="form-control">
+                  <input type="text" name="whatsapp_number" dir="ltr" value="${escapeHtml(settingsMap.whatsapp_number || '+201004491026')}" class="form-control">
                 </div>
                 <div class="form-group" style="margin: 0;">
                   <label class="form-label">${isRtl ? 'هاتف الاتصال' : 'Public Phone Number'}</label>
-                  <input type="text" name="contact_phone" value="${escapeHtml(settingsMap.contact_phone || '+201004491026')}" class="form-control">
+                  <input type="text" name="contact_phone" dir="ltr" value="${escapeHtml(settingsMap.contact_phone || '+201004491026')}" class="form-control">
                 </div>
               </div>
 

@@ -473,7 +473,7 @@ export async function seedDatabase() {
         whatsapp: '+201020304050',
         email: 'sales@deltareyy.com',
         products: ['Netafim Drip Lines', 'Fertilizer Venturi Pumps', 'Deep Well Turbines', 'Centrifugal Gravel Filters'],
-        logo: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=300&q=80'
+        logo: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=600&q=80'
       },
       {
         slug: 'sunagro-solar-pumping',
@@ -486,7 +486,7 @@ export async function seedDatabase() {
         whatsapp: '+201090807060',
         email: 'info@sunagro-eg.com',
         products: ['Tier-1 Monocrystalline Solar Panels', 'Fuji / INVT Solar Inverters', 'Galvanized Mounting Structures'],
-        logo: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=300&q=80'
+        logo: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600&q=80'
       },
       {
         slug: 'nile-agritech-seedlings',
@@ -499,7 +499,7 @@ export async function seedDatabase() {
         whatsapp: '+201122334455',
         email: 'orders@nilepalms.com',
         products: ['Medjool Palm Offsets', 'Kalamata Olive Trees', 'Citrus Rootstocks'],
-        logo: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=300&q=80'
+        logo: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80'
       }
     ];
 

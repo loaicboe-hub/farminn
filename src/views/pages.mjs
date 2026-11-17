@@ -861,7 +861,7 @@ export function renderPartnershipsPage({ lang, partnerships = [], locations = []
     <div class="container stack" style="padding-block: var(--space-8); gap: var(--space-6);">
       <div class="grid grid--cols-2" style="gap: var(--space-6);">
         ${partnerships.map(p => `
-          <div class="card stack" style="padding: var(--space-6); gap: var(--space-4); background: #ffffff; border-top: 4px solid var(--color-accent);">
+          <div class="card" style="padding: var(--space-6); background: #ffffff; border-top: 4px solid var(--color-accent); display: flex; flex-direction: column; height: 100%; gap: var(--space-4);">
             <div class="cluster" style="justify-content: space-between;">
               <span class="badge badge--warning">
                 ${p.partnership_type === 'capital_investor' ? (isRtl ? 'مطلوب شريك ممول' : 'Capital Investor Needed') : (isRtl ? 'مطلوب شريك تشغيلي' : 'Operating Partner')}
@@ -871,7 +871,7 @@ export function renderPartnershipsPage({ lang, partnerships = [], locations = []
               </span>
             </div>
 
-            <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--color-secondary); margin: 0;">
+            <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--color-secondary); margin: 0; min-height: 2.6em; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
               ${escapeHtml(isRtl ? p.title_ar : p.title_en)}
             </h3>
 
@@ -886,13 +886,13 @@ export function renderPartnershipsPage({ lang, partnerships = [], locations = []
               </div>
             </div>
 
-            <p style="color: var(--color-text-secondary); line-height: 1.6; margin: 0; font-size: 0.95rem;">
+            <p style="color: var(--color-text-secondary); line-height: 1.6; margin: 0; font-size: 0.95rem; flex: 1 1 auto; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
               ${escapeHtml(isRtl ? p.objectives_ar : p.objectives_en)}
             </p>
 
-            <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-4); display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--color-text-muted);">
-                ${isRtl ? 'المسؤول:' : 'Contact:'} ${escapeHtml(p.contact_name)} (${p.contact_phone})
+            <div style="margin-top: auto; border-top: 1px solid var(--color-border); padding-top: var(--space-4); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <span style="font-size: 0.85rem; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 4px;">
+                ${isRtl ? 'المسؤول:' : 'Contact:'} ${escapeHtml(p.contact_name)} (<bdi dir="ltr" class="phone-number">${escapeHtml(p.contact_phone)}</bdi>)
               </span>
               <a href="https://wa.me/${p.contact_whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="whatsapp-btn btn btn--sm" style="border-radius: 6px;">
                 ${isRtl ? 'تواصل للشراكة' : 'Discuss Partnership'}
@@ -1117,33 +1117,46 @@ export function renderSuppliersPage({ lang, suppliers = [], categories = [] }) {
     </div>
 
     <div class="container stack" style="padding-block: var(--space-8); gap: var(--space-6);">
-      <div class="grid grid--cols-3" style="gap: var(--space-6);">
-        ${suppliers.map(s => `
-          <div class="card stack" style="padding: var(--space-5); gap: var(--space-3); background: #ffffff;">
-            <div class="cluster" style="gap: 12px;">
-              <img src="${escapeHtml(s.logo_url || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=120&q=80')}" alt="${escapeHtml(s.company_name_en)}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
-              <div>
-                <span class="badge badge--success" style="font-size: 0.7rem; padding: 2px 6px;">✔ ${isRtl ? 'مورد معتمد' : 'Verified Vendor'}</span>
-                <h3 style="font-size: 1.15rem; font-weight: 700; margin: 2px 0 0;">
-                  ${escapeHtml(isRtl ? s.company_name_ar : s.company_name_en)}
-                </h3>
+      <div class="grid grid--cols-3" style="gap: var(--space-6); align-items: stretch;">
+        ${suppliers.map(s => {
+          const cleanPhone = (s.phone || '').replace(/[^0-9]/g, '');
+          const cleanWhatsapp = (s.whatsapp || '').replace(/[^0-9]/g, '');
+          const fallbackImg = 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=600&q=80';
+          return `
+          <div class="card" style="display: flex; flex-direction: column; height: 100%; padding: 0; overflow: hidden; background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <!-- Supplier Cover Image with Verified Badge -->
+            <div style="position: relative; width: 100%; height: 160px; background: var(--color-surface-alt); overflow: hidden;">
+              <img src="${escapeHtml(s.logo_url || fallbackImg)}" alt="${escapeHtml(isRtl ? s.company_name_ar : s.company_name_en)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null; this.src='${fallbackImg}';">
+              <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);"></div>
+              <span class="badge badge--success" style="position: absolute; top: 12px; inset-inline-end: 12px; font-size: 0.75rem; padding: 4px 10px; background: #166534; color: #ffffff; font-weight: 700; border: none; box-shadow: 0 2px 4px rgba(0,0,0,0.25);">
+                ✔ ${isRtl ? 'مورد معتمد' : 'Verified Vendor'}
+              </span>
+            </div>
+
+            <!-- Card Content Body -->
+            <div style="padding: var(--space-5); display: flex; flex-direction: column; flex: 1 1 auto; gap: var(--space-3);">
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--color-secondary); margin: 0; line-height: 1.4; min-height: 2.8em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                ${escapeHtml(isRtl ? s.company_name_ar : s.company_name_en)}
+              </h3>
+
+              <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0; flex: 1 1 auto; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                ${escapeHtml(isRtl ? s.description_ar : s.description_en)}
+              </p>
+
+              <!-- Bottom Action Bar Fixed to Bottom -->
+              <div style="margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                <a href="tel:${cleanPhone}" style="text-decoration: none; font-size: 0.88rem; font-weight: 600; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 0.95rem;">📞</span>
+                  <bdi dir="ltr" class="phone-number">${escapeHtml(s.phone)}</bdi>
+                </a>
+                <a href="https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(isRtl ? `مرحباً، أطلب عرض أسعار من ${s.company_name_ar}` : `Hello, inquiring about products from ${s.company_name_en}`)}" target="_blank" rel="noopener" class="whatsapp-btn btn btn--sm" style="border-radius: 6px; padding: 7px 16px; font-weight: 700;">
+                  ${isRtl ? 'طلب تسعير' : 'Get Quote'}
+                </a>
               </div>
             </div>
-
-            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
-              ${escapeHtml(isRtl ? s.description_ar : s.description_en)}
-            </p>
-
-            <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-3); display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--color-text-muted);">
-                📞 ${escapeHtml(s.phone)}
-              </span>
-              <a href="https://wa.me/${s.whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="whatsapp-btn btn btn--sm" style="border-radius: 6px;">
-                ${isRtl ? 'طلب تسعير' : 'Get Quote'}
-              </a>
-            </div>
           </div>
-        `).join('')}
+        `;
+        }).join('')}
       </div>
     </div>
   `;
@@ -1166,15 +1179,18 @@ export function renderHumanResourcesPage({ lang, specialists = [], categories = 
 
     <div class="container stack" style="padding-block: var(--space-8); gap: var(--space-6);">
       <div class="grid grid--cols-3" style="gap: var(--space-6);">
-        ${specialists.map(sp => `
-          <div class="card stack" style="padding: var(--space-5); gap: var(--space-3); background: #ffffff;">
-            <div class="cluster" style="gap: 12px;">
-              <img src="${escapeHtml(sp.avatar_url || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80')}" alt="${escapeHtml(sp.full_name_en)}" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover;">
+        ${specialists.map(sp => {
+          const cleanPhone = (sp.phone || '').replace(/[^0-9]/g, '');
+          const cleanWhatsapp = (sp.whatsapp || '').replace(/[^0-9]/g, '');
+          return `
+          <div class="card" style="padding: var(--space-5); display: flex; flex-direction: column; height: 100%; gap: var(--space-3); background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+            <div class="cluster" style="gap: 12px; align-items: center;">
+              <img src="${escapeHtml(sp.avatar_url || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80')}" alt="${escapeHtml(sp.full_name_en)}" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
               <div>
-                <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0;">
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; min-height: 1.4em;">
                   ${escapeHtml(isRtl ? sp.full_name_ar : sp.full_name_en)}
                 </h3>
-                <span style="font-size: 0.85rem; color: var(--color-primary); font-weight: 600;">
+                <span style="font-size: 0.85rem; color: var(--color-primary); font-weight: 600; display: block;">
                   ${escapeHtml(isRtl ? sp.title_ar : sp.title_en)}
                 </span>
               </div>
@@ -1185,20 +1201,22 @@ export function renderHumanResourcesPage({ lang, specialists = [], categories = 
               <span class="badge badge--success" style="font-size: 0.72rem;">✔ ${isRtl ? 'مؤهل معتمد' : 'Verified'}</span>
             </div>
 
-            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0; flex: 1 1 auto; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
               ${escapeHtml(isRtl ? sp.bio_ar : sp.bio_en)}
             </p>
 
-            <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-3); display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--color-text-muted);">
-                📞 ${escapeHtml(sp.phone)}
-              </span>
-              <a href="https://wa.me/${sp.whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="btn btn--sm btn--primary">
+            <div style="margin-top: auto; border-top: 1px solid var(--color-border); padding-top: var(--space-3); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <a href="tel:${cleanPhone}" style="text-decoration: none; font-size: 0.85rem; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 4px;">
+                <span>📞</span>
+                <bdi dir="ltr" class="phone-number">${escapeHtml(sp.phone)}</bdi>
+              </a>
+              <a href="https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(isRtl ? `مرحباً، أستفسر بخصوص التعاون مع ${sp.full_name_ar}` : `Inquiring regarding cooperation with ${sp.full_name_en}`)}" target="_blank" class="btn btn--sm btn--primary" style="border-radius: 6px;">
                 ${isRtl ? 'طلب توظيف' : 'Hire / Contact'}
               </a>
             </div>
           </div>
-        `).join('')}
+        `;
+        }).join('')}
       </div>
     </div>
   `;
@@ -1507,8 +1525,8 @@ export function renderAboutPage({ lang }) {
 
 export function renderContactPage({ lang, settings = {} }) {
   const isRtl = lang === 'ar';
-  const phone = settings.contact_phone || '+20 100 234 5678';
-  const whatsapp = settings.whatsapp_number || '+20 100 234 5678';
+  const phone = settings.contact_phone || '+201004491026';
+  const whatsapp = settings.whatsapp_number || '+201004491026';
   const cleanWhatsapp = whatsapp.replace(/[^0-9]/g, '');
   const email = settings.contact_email || 'info@farminn.com';
   const address = isRtl ? (settings.address_ar || 'طريق مصر إسكندرية الصحراوي، الجيزة، مصر') : (settings.address_en || 'Cairo-Alexandria Desert Road, Giza, Egypt');
@@ -1543,7 +1561,7 @@ export function renderContactPage({ lang, settings = {} }) {
           </div>
           <div>
             <strong>${isRtl ? 'الهاتف المباشر:' : 'Direct Phone:'}</strong><br>
-            ${escapeHtml(phone)}
+            <bdi dir="ltr" class="phone-number">${escapeHtml(phone)}</bdi>
           </div>
         </div>
 
