@@ -101,14 +101,14 @@ Language scope explicitly constrained by stakeholder directive to two languages:
 
 ## 8. Centralized Contact Defaults & Integrations
 
-*(Live public values must be editable in Admin Dashboard -> Website Settings / Contact Information once deployed.)*
+*(Live public values are editable in Admin Dashboard -> Website Settings / Contact Information.)*
 
-- **Official Email**: `<!-- Placeholder / client email -->`
-- **Mobile Phone**: `<!-- Placeholder / client phone -->`
-- **WhatsApp Number**: `<!-- E.164 format without spaces for wa.me links -->`
-- **Physical Address**: `<!-- Office / factory / headquarters address -->`
-- **Working Hours**: `<!-- Days & hours -->`
-- **External Integrations** (optional): `<!-- Maps, Analytics, Captcha/Anti-spam, Object Storage -->`
+- **Official Email**: `info@farminn.com`
+- **Mobile Phone**: `+201004491026`
+- **WhatsApp Number**: `+201004491026`
+- **Physical Address**: `KM 58 Cairo-Alexandria Desert Road, Giza, Egypt`
+- **Working Hours**: `Sunday – Thursday: 9:00 AM – 6:00 PM`
+- **External Integrations** (optional): `WhatsApp Direct Links (wa.me/+201004491026), Google Maps location`
 
 ---
 

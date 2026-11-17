@@ -496,11 +496,11 @@ export function renderAdminDashboard({ lang = 'en', user, metrics = {}, farms = 
               <div class="grid grid--cols-2" style="gap: var(--space-4);">
                 <div class="form-group" style="margin: 0;">
                   <label class="form-label">${isRtl ? 'رقم الواتساب الرسمي' : 'Official WhatsApp Number'}</label>
-                  <input type="text" name="whatsapp_number" value="${escapeHtml(settingsMap.whatsapp_number || '+20 100 234 5678')}" class="form-control">
+                  <input type="text" name="whatsapp_number" value="${escapeHtml(settingsMap.whatsapp_number || '+201004491026')}" class="form-control">
                 </div>
                 <div class="form-group" style="margin: 0;">
                   <label class="form-label">${isRtl ? 'هاتف الاتصال' : 'Public Phone Number'}</label>
-                  <input type="text" name="contact_phone" value="${escapeHtml(settingsMap.contact_phone || '+20 100 234 5678')}" class="form-control">
+                  <input type="text" name="contact_phone" value="${escapeHtml(settingsMap.contact_phone || '+201004491026')}" class="form-control">
                 </div>
               </div>
 

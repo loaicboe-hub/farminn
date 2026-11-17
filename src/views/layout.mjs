@@ -11,8 +11,8 @@ export function renderShell({ lang = 'en', title = 'FARMINN', activeNav = '', us
     ? (settings.site_tagline_ar || 'المنصة الزراعية المتكاملة لسوق وإدارة المزارع')
     : (settings.site_tagline_en || 'Egypt Premier Agricultural Marketplace & Farm Management Platform');
 
-  const phone = settings.contact_phone || '+20 100 234 5678';
-  const whatsapp = settings.whatsapp_number || '+20 100 234 5678';
+  const phone = settings.contact_phone || '+201004491026';
+  const whatsapp = settings.whatsapp_number || '+201004491026';
   const cleanWhatsapp = whatsapp.replace(/[^0-9]/g, '');
   const email = settings.contact_email || 'info@farminn.com';
   const address = isRtl ? (settings.address_ar || 'طريق مصر إسكندرية الصحراوي، مصر') : (settings.address_en || 'Cairo-Alexandria Desert Road, Egypt');

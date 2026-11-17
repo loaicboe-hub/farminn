@@ -464,7 +464,7 @@ export function renderFarmDetailPage({ lang, farm, media = [], documents = [] })
   const title = isRtl ? (farm.title_ar || farm.title_en) : farm.title_en;
   const description = isRtl ? (farm.description_ar || farm.description_en) : farm.description_en;
   const govName = isRtl ? (farm.gov_name_ar || farm.gov_name_en) : farm.gov_name_en;
-  const cleanWhatsapp = (farm.contact_whatsapp || '201002345678').replace(/[^0-9]/g, '');
+  const cleanWhatsapp = (farm.contact_whatsapp || '201004491026').replace(/[^0-9]/g, '');
 
   const facilities = Array.isArray(farm.facilities) ? farm.facilities : [];
   const crops = Array.isArray(farm.crops) ? farm.crops : [];

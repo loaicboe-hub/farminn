@@ -97,14 +97,15 @@ async function verify() {
       'Cookie': sessionCookie
     },
     body: JSON.stringify({
-      contact_phone: '+20 100 999 8888'
+      contact_phone: '+201004491026',
+      whatsapp_number: '+201004491026'
     })
   });
   console.log(`[PASS] Update setting /api/admin/settings status: ${updateSettings.status}`);
 
   // 14. Verify Public Page reads the new setting dynamically from the database
   const publicContact = await request(`${base}/en/contact`);
-  console.log(`[PASS] Public Contact page dynamically displays updated phone: ${publicContact.body.includes('+20 100 999 8888')}`);
+  console.log(`[PASS] Public Contact page dynamically displays updated phone: ${publicContact.body.includes('+201004491026')}`);
 
   console.log('\n======================================================');
   console.log('🎉 ALL 14 FARMINN PLATFORM CHECKS VERIFIED SUCCESSFULLY!');

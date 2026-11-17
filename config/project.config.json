@@ -74,10 +74,10 @@
   "contactDefaults": {
     "note": "Manage live contact values centrally in Website Settings via the admin dashboard once DB is connected.",
     "publicEmail": "info@farminn.com",
-    "mobileNumber": "",
-    "whatsappNumber": "",
-    "physicalAddress": "",
-    "workingHours": ""
+    "mobileNumber": "+201004491026",
+    "whatsappNumber": "+201004491026",
+    "physicalAddress": "KM 58 Cairo-Alexandria Desert Road, Giza, Egypt",
+    "workingHours": "Sun - Thu 9:00 AM - 6:00 PM"
   },
   "deployment": {
     "primaryDomain": "",
