@@ -27,42 +27,20 @@ export default async function handler(req, res) {
   try {
     await ensureDatabaseReady();
 
-    // Debugging endpoint for Vercel
-    if (req.url.includes('/api/debug') || req.headers['x-matched-path']?.includes('/api/debug')) {
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({
-        url: req.url,
-        matchedPath: req.headers['x-matched-path'],
-        forwardedUri: req.headers['x-forwarded-uri'],
-        invokePath: req.headers['x-invoke-path'],
-        allHeaders: req.headers
-      }, null, 2));
-      return;
+    // Inspect Vercel headers for original path
+    const forwardedPath = req.headers['x-forwarded-uri'] || 
+                          req.headers['x-matched-path'] || 
+                          req.headers['x-invoke-path'] || 
+                          req.headers['x-original-url'] ||
+                          req.headers['x-vercel-matched-path'];
+
+    if (forwardedPath && forwardedPath !== '/api' && forwardedPath !== '/api/index.js') {
+      req.url = forwardedPath;
     }
 
-    // In Vercel rewrites, recover the original requested URL
-    const parsed = new URL(req.url, 'http://localhost');
-    let originalPath = parsed.searchParams.get('originalPath') || parsed.searchParams.get('__url');
-
-    if (originalPath && originalPath !== '/$1' && originalPath !== '/:slug*' && originalPath !== '/:path*') {
-      if (originalPath.startsWith('//')) {
-        originalPath = '/' + originalPath.replace(/^\/+/, '');
-      }
-      parsed.searchParams.delete('originalPath');
-      parsed.searchParams.delete('__url');
-      const remainingSearch = parsed.searchParams.toString();
-      req.url = originalPath + (remainingSearch ? (originalPath.includes('?') ? '&' : '?') + remainingSearch : '');
-    } else {
-      const hPath = req.headers['x-matched-path'] || 
-                    req.headers['x-forwarded-uri'] || 
-                    req.headers['x-invoke-path'] || 
-                    req.headers['x-now-route-matches'] || 
-                    req.headers['x-original-url'];
-      if (hPath && hPath !== '/api/index.js' && hPath !== '/api' && !hPath.startsWith('/api/index.js')) {
-        const search = parsed.search;
-        req.url = hPath + (search && !hPath.includes('?') ? search : '');
-      }
-    }
+    res.setHeader('x-debug-url', req.url);
+    res.setHeader('x-debug-forwarded', forwardedPath || 'none');
+    res.setHeader('x-debug-keys', Object.keys(req.headers).join(','));
 
     return await app(req, res);
   } catch (err) {

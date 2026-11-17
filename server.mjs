@@ -104,15 +104,8 @@ export async function app(req, res) {
       if (handled) return;
     }
 
-    // 3. Root Language Redirection & Safe Fallbacks
-    if (
-      pathname === '/' ||
-      pathname === '/api/index.js' ||
-      pathname === '/api' ||
-      pathname === '/$1' ||
-      pathname === '/:slug*' ||
-      pathname === '/:path*'
-    ) {
+    // 3. Root Language Redirection
+    if (pathname === '/') {
       const cookies = parseCookies(req);
       const userLang = cookies.site_lang || (req.headers['accept-language']?.includes('ar') ? 'ar' : 'en');
       const targetLang = ['ar', 'en'].includes(userLang) ? userLang : 'ar';
