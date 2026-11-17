@@ -769,62 +769,203 @@ export function renderManagementPage({ lang, requests = [], locations = [] }) {
     </div>
 
     <!-- Management Request Modal -->
-    <div id="mgmt-modal" class="modal-backdrop" hidden>
-      <div class="modal" style="max-inline-size: 600px;">
-        <div class="modal__header cluster" style="justify-content: space-between;">
-          <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800;">${isRtl ? 'طلب إدارة وتشغيل مزرعة' : 'Request Farm Management'}</h3>
-          <button type="button" class="btn btn--ghost btn--sm" id="close-mgmt-modal">&times;</button>
-        </div>
-        <form id="mgmt-req-form" class="stack" style="gap: var(--space-3); padding: var(--space-4);">
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">${isRtl ? 'عنوان الطلب' : 'Request Title'}</label>
-            <input type="text" name="title" required class="form-control" placeholder="${isRtl ? 'إدارة وتشغيل مزرعة 50 فدان...' : 'Full farm operations for 50 feddan...'}">
+    <div id="mgmt-modal" class="modal" hidden>
+      <div class="modal__dialog" style="max-inline-size: 640px; background: #ffffff;">
+        <div class="modal__header cluster" style="justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-3); margin-bottom: var(--space-4);">
+          <div class="cluster" style="gap: 10px; align-items: center;">
+            <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(30, 86, 49, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+              🚜
+            </div>
+            <div>
+              <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--color-secondary);">
+                ${isRtl ? 'طلب إدارة وتشغيل مزرعة' : 'Request Farm Management'}
+              </h3>
+              <p style="margin: 2px 0 0; font-size: 0.85rem; color: var(--color-text-muted);">
+                ${isRtl ? 'أدخل تفاصيل مزرعتك ليتواصل معك نخبة من مديري المزارع والمهندسين المعتمدين' : 'Enter your farm details to receive operational proposals from certified farm managers'}
+              </p>
+            </div>
           </div>
-          <div class="grid grid--cols-2" style="gap: var(--space-3);">
+          <button type="button" class="btn btn--ghost btn--sm" id="close-mgmt-modal" aria-label="Close" style="font-size: 1.6rem; line-height: 1; padding: 4px 10px; cursor: pointer; color: var(--color-text-muted);">&times;</button>
+        </div>
+        <form id="mgmt-req-form" class="stack" style="gap: var(--space-4);">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+              ${isRtl ? 'عنوان الطلب' : 'Request Title'} <span style="color: var(--color-danger);">*</span>
+            </label>
+            <input type="text" name="title" required class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="${isRtl ? 'مثال: إدارة وتشغيل مزرعة نخيل وموالح 50 فدان' : 'e.g. Full operations for 50 feddan palm & citrus farm'}">
+          </div>
+          <div class="grid grid--cols-2" style="gap: var(--space-4);">
             <div class="form-group" style="margin: 0;">
-              <label class="form-label">${isRtl ? 'المحافظة' : 'Governorate'}</label>
-              <select name="governorateId" class="form-control">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'المحافظة' : 'Governorate'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <select name="governorateId" class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;">
                 ${locations.map(loc => `<option value="${loc.id}">${isRtl ? loc.name_ar : loc.name_en}</option>`).join('')}
               </select>
             </div>
             <div class="form-group" style="margin: 0;">
-              <label class="form-label">${isRtl ? 'المساحة (فدان)' : 'Area (Feddan)'}</label>
-              <input type="number" name="areaFeddan" required class="form-control" placeholder="50">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'المساحة (فدان)' : 'Area (Feddan)'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <input type="number" name="areaFeddan" required class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="50">
             </div>
           </div>
           <div class="form-group" style="margin: 0;">
-            <label class="form-label">${isRtl ? 'المحاصيل القائمة أو المستهدفة' : 'Crops / Target Activity'}</label>
-            <input type="text" name="crops" class="form-control" placeholder="${isRtl ? 'موالح، نخيل مجدول، خضروات' : 'Citrus, Palms, Vegetables'}">
+            <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+              ${isRtl ? 'المحاصيل القائمة أو المستهدفة' : 'Crops / Target Activity'}
+            </label>
+            <input type="text" name="crops" class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="${isRtl ? 'موالح، نخيل مجدول، خضروات' : 'Citrus, Palms, Vegetables'}">
           </div>
           <div class="form-group" style="margin: 0;">
-            <label class="form-label">${isRtl ? 'المقابل المالي المقترح / الميزانية' : 'Budget / Compensation'}</label>
-            <input type="text" name="budget" class="form-control" placeholder="${isRtl ? 'مثال: 30,000 جنيه شهرياً + نسبة أرباح' : 'e.g. 30,000 EGP / month'}">
+            <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+              ${isRtl ? 'المقابل المالي المقترح / الميزانية' : 'Budget / Compensation'}
+            </label>
+            <input type="text" name="budget" class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="${isRtl ? 'مثال: 30,000 جنيه شهرياً + نسبة أرباح' : 'e.g. 30,000 EGP / month + profit share'}">
           </div>
           <div class="form-group" style="margin: 0;">
-            <label class="form-label">${isRtl ? 'تفاصيل الطلب' : 'Project Details'}</label>
-            <textarea name="details" rows="3" class="form-control"></textarea>
+            <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+              ${isRtl ? 'تفاصيل الطلب' : 'Project Details'}
+            </label>
+            <textarea name="details" rows="3" class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="${isRtl ? 'صف طبيعة الأرض، نظام الري، السكن المتاح، وأي شروط خاصة...' : 'Describe irrigation system, available housing, expectations...'}"></textarea>
           </div>
-          <div class="grid grid--cols-2" style="gap: var(--space-3);">
+          <div class="grid grid--cols-2" style="gap: var(--space-4);">
             <div class="form-group" style="margin: 0;">
-              <label class="form-label">${isRtl ? 'اسم المالك / المسؤول' : 'Contact Name'}</label>
-              <input type="text" name="contactName" required class="form-control">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'اسم المالك / المسؤول' : 'Contact Name'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <input type="text" name="contactName" required class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;">
             </div>
             <div class="form-group" style="margin: 0;">
-              <label class="form-label">${isRtl ? 'رقم الهاتف / الواتساب' : 'Phone Number'}</label>
-              <input type="tel" name="contactPhone" required class="form-control">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'رقم الهاتف / الواتساب' : 'Phone Number'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <input type="tel" name="contactPhone" required class="form-control" dir="ltr" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px; text-align: ${isRtl ? 'right' : 'left'};" placeholder="+201004491026">
             </div>
           </div>
-          <button type="submit" class="btn btn--primary" style="height: 44px; margin-top: 8px;">
-            ${isRtl ? 'نشر طلب الإدارة' : 'Publish Request'}
-          </button>
+          <div class="cluster" style="justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-2); border-top: 1px solid var(--color-border); padding-top: var(--space-4);">
+            <button type="button" class="btn btn--secondary" id="cancel-mgmt-modal" style="height: 44px; padding-inline: var(--space-4); font-weight: 600;">
+              ${isRtl ? 'إلغاء' : 'Cancel'}
+            </button>
+            <button type="submit" class="btn btn--primary" style="height: 44px; padding-inline: var(--space-6); font-weight: 700;">
+              ${isRtl ? 'نشر طلب الإدارة' : 'Publish Request'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Proposal Submission Modal -->
+    <div id="proposal-modal" class="modal" hidden>
+      <div class="modal__dialog" style="max-inline-size: 580px; background: #ffffff;">
+        <div class="modal__header cluster" style="justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-3); margin-bottom: var(--space-4);">
+          <div class="cluster" style="gap: 10px; align-items: center;">
+            <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(30, 86, 49, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+              📋
+            </div>
+            <div>
+              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--color-secondary);">
+                ${isRtl ? 'تقديم عرض إدارة وتشغيل' : 'Submit Management Proposal'}
+              </h3>
+              <p id="proposal-target-title" style="margin: 2px 0 0; font-size: 0.85rem; color: var(--color-text-muted); font-weight: 600;"></p>
+            </div>
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm" id="close-proposal-modal" aria-label="Close" style="font-size: 1.6rem; line-height: 1; padding: 4px 10px; cursor: pointer; color: var(--color-text-muted);">&times;</button>
+        </div>
+        <form id="proposal-form" class="stack" style="gap: var(--space-4);">
+          <input type="hidden" name="requestId" id="proposal-req-id">
+          <div class="grid grid--cols-2" style="gap: var(--space-4);">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'اسم المهندس / المدير الزراعي' : 'Manager / Engineer Name'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <input type="text" name="managerName" required class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;">
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'رقم الهاتف / الواتساب' : 'Phone / WhatsApp'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <input type="tel" name="managerPhone" required class="form-control" dir="ltr" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px; text-align: ${isRtl ? 'right' : 'left'};" placeholder="+201004491026">
+            </div>
+          </div>
+          <div class="grid grid--cols-2" style="gap: var(--space-4);">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'المقابل المالي المقترح (جنيه)' : 'Proposed Fee (EGP)'} <span style="color: var(--color-danger);">*</span>
+              </label>
+              <input type="number" name="proposedFee" required class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="25000">
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+                ${isRtl ? 'نوع الأتعاب' : 'Fee Type'}
+              </label>
+              <select name="feeType" class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;">
+                <option value="fixed_monthly">${isRtl ? 'راتب شهري ثابت' : 'Fixed Monthly'}</option>
+                <option value="fixed_plus_percentage">${isRtl ? 'شهري ثابت + نسبة أرباح' : 'Fixed + % Profit Share'}</option>
+                <option value="percentage_only">${isRtl ? 'نسبة من صافي الأرباح فقط' : 'Profit Share Only'}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" style="font-weight: 700; color: var(--color-text); margin-bottom: 6px; display: block;">
+              ${isRtl ? 'تفاصيل العرض الفني والتشغيلي وخبراتك' : 'Technical & Operational Proposal Details'} <span style="color: var(--color-danger);">*</span>
+            </label>
+            <textarea name="details" rows="3" required class="form-control" style="background: #ffffff; color: var(--color-text); border: 1px solid #cbd5e1; font-size: 0.95rem; border-radius: 8px; padding: 10px 14px;" placeholder="${isRtl ? 'اذكر خطة العمل المقترحة، عدد الزيارات، والخبرة السابقة في نفس المحصول...' : 'Outline your operational plan, scheduled visits, crop experience...'}"></textarea>
+          </div>
+          <div class="cluster" style="justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-2); border-top: 1px solid var(--color-border); padding-top: var(--space-4);">
+            <button type="button" class="btn btn--secondary" id="cancel-proposal-modal" style="height: 44px; padding-inline: var(--space-4); font-weight: 600;">
+              ${isRtl ? 'إلغاء' : 'Cancel'}
+            </button>
+            <button type="submit" class="btn btn--primary" style="height: 44px; padding-inline: var(--space-6); font-weight: 700;">
+              ${isRtl ? 'إرسال العرض' : 'Submit Proposal'}
+            </button>
+          </div>
         </form>
       </div>
     </div>
 
     <script>
-      const modal = document.getElementById('mgmt-modal');
-      document.getElementById('open-mgmt-req-btn')?.addEventListener('click', () => modal.hidden = false);
-      document.getElementById('close-mgmt-modal')?.addEventListener('click', () => modal.hidden = true);
+      const mgmtModal = document.getElementById('mgmt-modal');
+      const proposalModal = document.getElementById('proposal-modal');
+
+      document.getElementById('open-mgmt-req-btn')?.addEventListener('click', () => {
+        mgmtModal.hidden = false;
+      });
+      document.getElementById('close-mgmt-modal')?.addEventListener('click', () => {
+        mgmtModal.hidden = true;
+      });
+      document.getElementById('cancel-mgmt-modal')?.addEventListener('click', () => {
+        mgmtModal.hidden = true;
+      });
+      mgmtModal?.addEventListener('click', (e) => {
+        if (e.target === mgmtModal) mgmtModal.hidden = true;
+      });
+
+      // Proposal modal bindings
+      document.querySelectorAll('.submit-proposal-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const reqId = btn.getAttribute('data-req-id');
+          const reqTitle = btn.getAttribute('data-req-title');
+          document.getElementById('proposal-req-id').value = reqId;
+          document.getElementById('proposal-target-title').textContent = reqTitle;
+          proposalModal.hidden = false;
+        });
+      });
+      document.getElementById('close-proposal-modal')?.addEventListener('click', () => {
+        proposalModal.hidden = true;
+      });
+      document.getElementById('cancel-proposal-modal')?.addEventListener('click', () => {
+        proposalModal.hidden = true;
+      });
+      proposalModal?.addEventListener('click', (e) => {
+        if (e.target === proposalModal) proposalModal.hidden = true;
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (mgmtModal) mgmtModal.hidden = true;
+          if (proposalModal) proposalModal.hidden = true;
+        }
+      });
       
       document.getElementById('mgmt-req-form')?.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -836,11 +977,33 @@ export function renderManagementPage({ lang, requests = [], locations = [] }) {
             body: JSON.stringify(data)
           });
           if (res.ok) {
-            alert('${isRtl ? 'تم نشر طلب الإدارة بنجاح' : 'Management request published'}');
+            alert('${isRtl ? 'تم نشر طلب الإدارة بنجاح' : 'Management request published successfully'}');
             window.location.reload();
           } else {
             const err = await res.json();
             alert(err.error || 'Failed to submit');
+          }
+        } catch (e) {
+          alert(e.message);
+        }
+      });
+
+      document.getElementById('proposal-form')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(this).entries());
+        const reqId = data.requestId;
+        try {
+          const res = await fetch('/api/management/requests/' + reqId + '/proposals', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (res.ok) {
+            alert('${isRtl ? 'تم إرسال عرض الإدارة بنجاح' : 'Management proposal submitted successfully'}');
+            window.location.reload();
+          } else {
+            const err = await res.json();
+            alert(err.error || 'Failed to submit proposal');
           }
         } catch (e) {
           alert(e.message);

@@ -518,28 +518,34 @@ textarea.form-control {
 }
 
 /* --- Modal Dialog --- */
-.modal {
+.modal,
+.modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: var(--z-modal);
+  z-index: 9999;
   display: grid;
   place-items: center;
   padding: var(--space-4);
-  background: rgba(15, 23, 42, 0.55);
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
-.modal[hidden] {
-  display: none;
+.modal[hidden],
+.modal-backdrop[hidden],
+[hidden] {
+  display: none !important;
 }
 
 .modal__dialog {
-  inline-size: min(100%, 34rem);
+  inline-size: min(100%, 38rem);
   max-block-size: 90dvh;
   overflow-y: auto;
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lg);
+  background: #ffffff !important;
+  color: var(--color-text, #1e293b);
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--color-border, #e2e8f0);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
   padding: var(--space-6);
 }
 
